@@ -1,0 +1,137 @@
+{
+  "premium_legal_sources": {
+    "tier_1_authorities": [
+      {
+        "url": "https://www.americanbar.org/groups/artificial_intelligence/",
+        "domain": "americanbar.org",
+        "trust_score": 1.0,
+        "category": "ai_readiness",
+        "description": "ABA Artificial Intelligence Section",
+        "expected_content": "artificial intelligence, legal ethics, AI guidelines"
+      },
+      {
+        "url": "https://www.americanbar.org/groups/law_practice/publications/techreport/abatechreport2023/",
+        "domain": "americanbar.org", 
+        "trust_score": 1.0,
+        "category": "ai_readiness",
+        "description": "ABA 2023 Legal Technology Survey",
+        "expected_content": "legal technology, survey results, adoption rates"
+      },
+      {
+        "url": "https://www.americanbar.org/groups/business_law/committees/cyberspace/",
+        "domain": "americanbar.org",
+        "trust_score": 1.0,
+        "category": "legal_tech",
+        "description": "ABA Cyberspace Law Committee",
+        "expected_content": "cybersecurity, data privacy, technology law"
+      },
+      {
+        "url": "https://www.uscourts.gov/news/2024/01/15/federal-courts-artificial-intelligence",
+        "domain": "uscourts.gov",
+        "trust_score": 1.0, 
+        "category": "attorney_workflows_ai",
+        "description": "Federal Courts AI Guidelines",
+        "expected_content": "federal courts, AI use guidelines, judicial system"
+      },
+      {
+        "url": "https://www.supremecourt.gov/opinions/boundvolumes/",
+        "domain": "supremecourt.gov",
+        "trust_score": 1.0,
+        "category": "legal_authority",
+        "description": "Supreme Court Opinions Archive",
+        "expected_content": "supreme court, opinions, judicial precedent"
+      }
+    ],
+    "tier_2_industry": [
+      {
+        "url": "https://www.law.com/legaltechnews/",
+        "domain": "law.com",
+        "trust_score": 0.9,
+        "category": "legal_tech",
+        "description": "Law.com Legal Technology News",
+        "expected_content": "legal technology, industry news, innovation"
+      },
+      {
+        "url": "https://www.law.com/americanlawyer/2024/artificial-intelligence-law-firms/",
+        "domain": "law.com",
+        "trust_score": 0.9,
+        "category": "ai_readiness",
+        "description": "American Lawyer AI Coverage",
+        "expected_content": "law firms, artificial intelligence, implementation"
+      },
+      {
+        "url": "https://www.ilta.net/resources/surveys/",
+        "domain": "ilta.net",
+        "trust_score": 0.85,
+        "category": "legal_tech",
+        "description": "ILTA Technology Surveys",
+        "expected_content": "legal technology, surveys, IT trends"
+      },
+      {
+        "url": "https://www.legaltech.org/insights/artificial-intelligence/",
+        "domain": "legaltech.org",
+        "trust_score": 0.8,
+        "category": "ai_readiness",
+        "description": "Legal Technology Organization AI Insights",
+        "expected_content": "AI insights, legal tech, implementation"
+      },
+      {
+        "url": "https://www.thomsonreuters.com/en/institute/reports.html",
+        "domain": "thomsonreuters.com",
+        "trust_score": 0.9,
+        "category": "legal_research",
+        "description": "Thomson Reuters Institute Reports",
+        "expected_content": "legal industry, research reports, trends"
+      }
+    ],
+    "tier_3_specialized": [
+      {
+        "url": "https://www.abajournal.com/magazine/latest/artificial-intelligence",
+        "domain": "abajournal.com",
+        "trust_score": 0.9,
+        "category": "ai_readiness",
+        "description": "ABA Journal AI Magazine Coverage",
+        "expected_content": "artificial intelligence, legal profession, ethics"
+      },
+      {
+        "url": "https://www.legalethics.com/artificial-intelligence-ethics/",
+        "domain": "legalethics.com",
+        "trust_score": 0.75,
+        "category": "attorney_workflows_ai",
+        "description": "Legal Ethics AI Coverage",
+        "expected_content": "legal ethics, AI ethics, professional responsibility"
+      },
+      {
+        "url": "https://www.lawsitesblog.com/category/artificial-intelligence",
+        "domain": "lawsitesblog.com",
+        "trust_score": 0.7,
+        "category": "legal_tech",
+        "description": "LawSites Blog AI Category",
+        "expected_content": "law firm technology, AI tools, reviews"
+      },
+      {
+        "url": "https://www.legaltechnews.com/artificial-intelligence/",
+        "domain": "legaltechnews.com",
+        "trust_score": 0.75,
+        "category": "ai_readiness",
+        "description": "Legal Tech News AI Section",
+        "expected_content": "legal technology news, AI developments"
+      },
+      {
+        "url": "https://www.bloomberg.com/law/insights/artificial-intelligence/",
+        "domain": "bloomberg.com",
+        "trust_score": 0.85,
+        "category": "legal_industry",
+        "description": "Bloomberg Law AI Insights",
+        "expected_content": "legal industry, AI trends, business intelligence"
+      }
+    ]
+  },
+  "scraping_strategy": {
+    "batch_size": 3,
+    "delay_between_requests": 5000,
+    "timeout_per_request": 45000,
+    "retry_failed": true,
+    "content_quality_threshold": 1000
+  }
+}

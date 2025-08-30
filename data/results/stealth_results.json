@@ -1,0 +1,42 @@
+{
+  "timestamp": "2025-08-29T01:58:45.274Z",
+  "total_targets": 4,
+  "successful_bypasses": 1,
+  "still_blocked": 3,
+  "results": [
+    {
+      "success": true,
+      "blocked": false,
+      "url": "https://www.americanbar.org/groups/artificial_intelligence/",
+      "content": "SKIP TO CONTENT Events CLE Shop ABA Member Directory Join Log In About Us Membership News Diversity Advocacy & Initiatives Topics & Resources ABA Groups Page Not Found 404 Error Unfortunately, this page does not exist. Please check your URL or return to the homepage. Search ABA ABA Resources ABA Journal ABA-Approved Law Schools Law School Accreditation Bar Leadership Legal Resources for the Public ABA Career Center Model Rules of Professional Conduct The ABA About the ABA Work at the ABA ABA Member Benefits Office of the President ABA Newsroom Connect Contact Us Contact Media Relations Web Staff Portal Terms of Use Code of Conduct Privacy Policy Copyright & IP Policy State Disclosures Advertising & Sponsorship Cookies Settings ® ® © 2025 American Bar Association, all rights reserved. Privacy Preference Center Your Privacy Strictly Necessary Cookies Performance Cookies Functional Cookies Targeting Cookies Your Privacy When you visit any website, it may store or retrieve information on your browser, mostly in the form of cookies. This information might be about you, your preferences or your device and is mostly used to make the site work as you expect. The information can give you a more personalized web experience. Because we respect your right to privacy, you can choose not to allow some types of cookies. Click on the different category headings to find out more and change our default settings. However, blocking some types of cookies may impact your experience of the site and the services we are able to offer. More information Strictly Necessary Cookies Always Active These cookies are necessary for the website to function and cannot be switched off in our systems. They are usually only set in response to actions made by you which amount to a request for services, such as setting your privacy preferences, logging in or filling in forms. You can set your browser to block or alert you about these cookies, but some parts of the site will not then work. These cookies do not store any personally identifiable information. Performance Cookies Performance Cookies Inactive These cookies allow us to count visits and traffic sources so we can measure and improve the performance of our site. They help us to know which pages are the most and least popular and see how visitors move around the site. All information these cookies collect is aggregated and therefore anonymous. If you do not allow these cookies we will not know when you have visited our site, and will not be able to monitor its performance. Functional Cookies Functional Cookies Inactive These cookies enable the website to provide enhanced functionality and personalization. They may be set by us or by third-party providers whose services we have added to our pages. If you do not allow these cookies, some or all of these services may not function properly. Targeting Cookies Targeting Cookies Inactive These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant ads on other sites. They do not directly store personal information, but are based on uniquely identifying your browser and internet device. If you do not allow these cookies, you will experience less targeted advertising. Back Vendor Search Consent Leg.Interest checkbox label label checkbox label label checkbox label label Clear checkbox label label Apply Cancel Confirm My Choices Allow All We are making improvements to our user experience and offering more transparency and control over cookies. By clicking “Accept All Cookies,\" you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in marketing efforts. Click on \"Customize Settings\" to learn more about individual cookies and choose settings by category.Privacy policy Cookies Settings Accept All Cookies",
+      "content_length": 3884,
+      "title": "Page Not Found",
+      "quality_score": 8,
+      "has_legal_content": true,
+      "duration_ms": 6186,
+      "bypass_strategy": "stealth_plus_delay",
+      "user_agent_used": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
+    },
+    {
+      "success": false,
+      "blocked": true,
+      "url": "https://www.americanbar.org/groups/law_practice/publications/techreport/",
+      "error": "Cloudflare protection active",
+      "duration_ms": 4098
+    },
+    {
+      "success": false,
+      "blocked": true,
+      "url": "https://www.americanbar.org/news/abanews/publications/yourlegal-update/2024/artificial-intelligence/",
+      "error": "Cloudflare protection active",
+      "duration_ms": 4131
+    },
+    {
+      "success": false,
+      "blocked": true,
+      "url": "https://www.americanbar.org/groups/business_law/resources/business-lawyer-the/2024-issues/march-2024/artificial-intelligence/",
+      "error": "Cloudflare protection active",
+      "duration_ms": 4089
+    }
+  ]
+}

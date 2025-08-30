@@ -1,0 +1,122 @@
+{
+  "trusted_domains": {
+    "primary_sources": [
+      {
+        "domain": "americanbar.org",
+        "trust_score": 1.0,
+        "category": "legal_authority",
+        "description": "American Bar Association - primary legal authority"
+      },
+      {
+        "domain": "uscourts.gov", 
+        "trust_score": 1.0,
+        "category": "legal_authority",
+        "description": "US Federal Courts system"
+      },
+      {
+        "domain": "supremecourt.gov",
+        "trust_score": 1.0,
+        "category": "legal_authority", 
+        "description": "US Supreme Court"
+      },
+      {
+        "domain": "justice.gov",
+        "trust_score": 0.95,
+        "category": "legal_authority",
+        "description": "US Department of Justice"
+      }
+    ],
+    "legal_tech_vendors": [
+      {
+        "domain": "clio.com",
+        "trust_score": 0.85,
+        "category": "legal_tech",
+        "description": "Leading legal practice management platform"
+      },
+      {
+        "domain": "lawgeex.com",
+        "trust_score": 0.8,
+        "category": "legal_ai",
+        "description": "AI contract review platform"
+      },
+      {
+        "domain": "legalzoom.com",
+        "trust_score": 0.75,
+        "category": "consumer_legal",
+        "description": "Consumer legal services"
+      },
+      {
+        "domain": "thomsonreuters.com",
+        "trust_score": 0.9,
+        "category": "legal_research",
+        "description": "Westlaw and legal research"
+      }
+    ],
+    "legal_industry_analysts": [
+      {
+        "domain": "abajournal.com",
+        "trust_score": 0.9,
+        "category": "legal_news",
+        "description": "ABA Journal - legal profession news"
+      },
+      {
+        "domain": "law.com",
+        "trust_score": 0.85,
+        "category": "legal_news", 
+        "description": "Legal industry news and analysis"
+      },
+      {
+        "domain": "legaltech.org",
+        "trust_score": 0.8,
+        "category": "legal_tech",
+        "description": "Legal technology association"
+      },
+      {
+        "domain": "ilta.net",
+        "trust_score": 0.85,
+        "category": "legal_tech",
+        "description": "International Legal Technology Association"
+      }
+    ],
+    "ai_research": [
+      {
+        "domain": "openai.com",
+        "trust_score": 0.85,
+        "category": "ai_research",
+        "description": "AI research and development"
+      },
+      {
+        "domain": "anthropic.com",
+        "trust_score": 0.85,
+        "category": "ai_research", 
+        "description": "AI safety and research"
+      },
+      {
+        "domain": "stanford.edu",
+        "trust_score": 0.95,
+        "category": "academic",
+        "description": "Stanford HAI and law school"
+      }
+    ]
+  },
+  "initial_urls": [
+    {
+      "url": "https://www.americanbar.org/groups/law_practice/publications/techreport/",
+      "priority": "high",
+      "category": "ai_readiness",
+      "description": "ABA Legal Technology Survey Report - definitive annual survey on law firm tech adoption"
+    },
+    {
+      "url": "https://www.abajournal.com/web/article/artificial-intelligence-law-firms",
+      "priority": "high", 
+      "category": "attorney_workflows_ai",
+      "description": "ABA Journal AI coverage - how law firms are implementing AI tools"
+    },
+    {
+      "url": "https://www.clio.com/blog/legal-trends-report/",
+      "priority": "high",
+      "category": "revops_legal",
+      "description": "Clio Legal Trends Report - annual data on law firm operations and client expectations"
+    }
+  ]
+}

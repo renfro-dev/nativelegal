@@ -1,0 +1,43 @@
+name: "Agentic SEO Machine — Law-Firm AI Context Pack"
+version: 1
+includes:
+  - path: ./docs/PRD.md
+    purpose: Product goals, constraints, acceptance criteria (law-firm SEO)
+  - path: ./docs/Blueprint.md
+    purpose: Architecture, modules, interfaces, sequencing
+  - path: ./docs/Tasks.md
+    purpose: Work breakdown, DoD, next steps
+  - path: ./docs/image_seo_spec.md
+    purpose: Image SEO metadata requirements and agent responsibilities
+  - path: ./policies.md
+    purpose: Rules of engagement, orchestration loop, guardrails
+  - path: ./evaluation/qa_criteria.md
+    purpose: Cross-cutting QA before merges
+  - path: ./agents/supervisor.md
+    purpose: Supervisor role/system
+  - path: ./agents/reviewer.md
+    purpose: Reviewer/QA gate
+  - path: ./agents/researcher.md
+    purpose: Crawl/ingest & topic map
+  - path: ./agents/strategist.md
+    purpose: Weekly plan & prioritization
+  - path: ./agents/outliner.md
+    purpose: H2/H3, FAQ, links plan
+  - path: ./agents/writer.md
+    purpose: MDX drafts with citations + disclaimers
+  - path: ./agents/editor.md
+    purpose: Fact-check, tone, legal compliance, visual preparation
+  - path: ./agents/visual_designer.md
+    purpose: AI image generation, visual quality control, brand consistency
+  - path: ./agents/publisher.md
+    purpose: Publish content with images, sitemap/RSS, asset verification
+  - path: ./agents/indexer.md
+    purpose: Search engine pings & GSC submission
+  - path: ./agents/analyst.md
+    purpose: GA4/GSC pulls → metrics
+  - path: ./agents/reflector.md
+    purpose: Weekly actions to improve CTR/conversions
+  - path: ./orchestration/state.json
+    purpose: Live plan, tasks, progress, risks
+  - path: ./orchestration/decisions.md
+    purpose: Decision log (why X over Y)

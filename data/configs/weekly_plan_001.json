@@ -1,0 +1,98 @@
+{
+  "week": "2025-W04",
+  "theme": "AI Readiness Assessment for Law Firms",
+  "target_audience": "Partners and Operations Directors at US law firms",
+  "content_strategy": {
+    "pillar": {
+      "title": "The Complete Guide to AI Readiness Assessment for US Law Firms",
+      "slug": "ai-readiness-assessment-law-firms-2025",
+      "category": "ai_readiness",
+      "type": "comprehensive_guide",
+      "target_keywords": [
+        "AI readiness assessment law firms",
+        "law firm AI implementation",
+        "legal technology readiness",
+        "AI audit law practice"
+      ],
+      "search_intent": "informational",
+      "serp_type": "featured_snippet_opportunity",
+      "competitors": [
+        "clio.com/blog/ai-for-lawyers",
+        "americanbar.org/groups/law_practice/publications/techreport",
+        "lawgeex.com/blog"
+      ],
+      "internal_link_strategy": "Hub for all AI content, link to both spokes",
+      "estimated_word_count": 3500,
+      "priority": "high"
+    },
+    "spokes": [
+      {
+        "title": "AI Ethics and Compliance Requirements for Law Firms: State-by-State Analysis",
+        "slug": "ai-ethics-compliance-law-firms-state-requirements",
+        "category": "attorney_workflows_ai", 
+        "type": "analysis_deep_dive",
+        "target_keywords": [
+          "AI ethics law firms",
+          "legal AI compliance requirements",
+          "attorney AI ethics rules",
+          "state bar AI guidelines"
+        ],
+        "search_intent": "informational/commercial",
+        "serp_type": "long_form_article",
+        "internal_link_strategy": "Link back to pillar, support with compliance examples",
+        "estimated_word_count": 2000,
+        "priority": "medium"
+      },
+      {
+        "title": "RevOps Metrics That Matter: Measuring AI ROI in Legal Practice Management",
+        "slug": "revops-metrics-ai-roi-legal-practice-management",
+        "category": "revops_legal",
+        "type": "data_driven_guide",
+        "target_keywords": [
+          "law firm RevOps metrics",
+          "legal practice management KPIs", 
+          "AI ROI law firms",
+          "legal operations analytics"
+        ],
+        "search_intent": "commercial/transactional",
+        "serp_type": "how_to_guide",
+        "internal_link_strategy": "Link to pillar, create pathway to services",
+        "estimated_word_count": 1800,
+        "priority": "medium"
+      }
+    ]
+  },
+  "seo_metadata": {
+    "pillar_meta": {
+      "title": "AI Readiness Assessment for Law Firms: Complete 2025 Guide",
+      "description": "Comprehensive guide to assessing AI readiness in law firms. Includes frameworks, checklists, and implementation strategies for nationwide legal practices.",
+      "focus_keyword": "AI readiness assessment law firms",
+      "schema_type": "HowTo"
+    },
+    "spoke_1_meta": {
+      "title": "AI Ethics & Compliance for Law Firms: State Requirements 2025",
+      "description": "Navigate AI ethics and compliance requirements across all 50 states. Essential guide for attorneys implementing AI tools in legal practice.",
+      "focus_keyword": "AI ethics law firms",
+      "schema_type": "Article"
+    },
+    "spoke_2_meta": {
+      "title": "RevOps Metrics for Legal: Measuring AI ROI in Law Firms",
+      "description": "Essential RevOps metrics and KPIs for measuring AI return on investment in legal practice management. Data-driven insights for law firm operations.",
+      "focus_keyword": "law firm RevOps metrics", 
+      "schema_type": "Article"
+    }
+  },
+  "content_calendar": {
+    "monday": "Research phase - Gather latest AI ethics rulings and state bar guidelines",
+    "tuesday": "Outline pillar content - AI readiness framework development",
+    "wednesday": "Draft pillar + spoke 1 (ethics/compliance)",
+    "thursday": "Draft spoke 2 (RevOps metrics) + internal linking",
+    "friday": "Edit, fact-check, and prepare for review"
+  },
+  "success_metrics": {
+    "target_impressions": 5000,
+    "target_clicks": 200, 
+    "target_ctr": "4%",
+    "target_keywords_ranking": 15
+  }
+}
