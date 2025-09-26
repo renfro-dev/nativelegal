@@ -20,7 +20,9 @@
     "**/.git/**",
     "**/dist/**",
     "**/build/**",
-    "**/.next/**"
+    "**/.next/**",
+    "**/frontend/src/**",
+    "**/.github/**"
   ],
   "pinFiles": [
     "context/docs/PRD.md",
