@@ -1,5 +1,5 @@
 {
-  "goal": "Ship v1 automated weekly cycle for law-firm SEO (nationwide USA focus)",
+  "goal": "Ship v1 Native Legal transformation engine with SEO content generation core, starting with family law focus but practice-area agnostic for long-term scalability",
   "constraints": ["timebox: 90m/session", "no secrets in repo"],
   "context": {
     "spec_files": ["/context/docs/PRD.md", "/context/docs/Blueprint.md"],
@@ -21,7 +21,7 @@
     { "id": "PROD-503", "owner": "Supervisor", "desc": "Full production deployment with monitoring", "status": "pending" }
   ],
   "progress": [
-    { "timestamp": "2025-01-27T00:00:00Z", "action": "Supervisor adopted role from context-pack.yaml", "outcome": "Ready to orchestrate 9-agent pipeline for law firm SEO automation" },
+    { "timestamp": "2025-01-27T00:00:00Z", "action": "Supervisor adopted role from context-pack.yaml", "outcome": "Ready to orchestrate 9-agent pipeline for Native Legal family law transformation" },
     { "timestamp": "2025-01-27T00:05:00Z", "action": "Updated geographic scope from CA to nationwide USA", "outcome": "Expanded target market for broader content opportunities and traffic potential" },
     { "timestamp": "2025-01-27T00:10:00Z", "action": "Completed Sprint 0 bootstrap", "outcome": "Database schema deployed, Cursor config optimized, ready for Sprint 1 agent pipeline" },
     { "timestamp": "2025-01-27T00:15:00Z", "action": "Researcher completed source ingestion setup", "outcome": "Created trusted sources list, deployed ingest_url Edge Function, prepared seed data for 3 high-authority URLs" },
@@ -61,8 +61,9 @@
   "current_status": {
     "sprint": "Sprint 3",
     "completion": "85%",
-    "next_milestone": "GA4 real-time integration",
+    "next_milestone": "GA4 real-time integration + practice-area agnostic content strategy",
     "estimated_completion": "2-3 days",
-    "blockers": "None - ready to proceed with analytics integration"
+    "blockers": "None - ready to proceed with analytics integration and content strategy refinement",
+    "strategic_focus": "SEO content generation as core engine, family law as Phase 1 market entry"
   }
 }

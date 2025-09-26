@@ -34,5 +34,36 @@ Publish complete content with images via static MDX, update sitemap/RSS, verify 
 - Alt text must be present for accessibility
 - No broken image links in published content
 
+## Blog Post Formatting Requirements
+**MANDATORY: Apply formatting rules before publishing**
+
+### Pre-Publishing Checklist
+- [ ] Apply all formatting rules from `blog-formatter.md`
+- [ ] Remove markdown symbols and artifacts
+- [ ] Generate functional table of contents
+- [ ] Ensure proper heading IDs for navigation
+- [ ] Verify no Next.js client component errors
+- [ ] Test TOC links and smooth scrolling
+- [ ] Confirm black, readable text throughout
+
+### Content Processing Pipeline
+1. **Remove duplicate TOC sections** - Strip markdown TOC
+2. **Convert headings to HTML** - Generate proper IDs
+3. **Clean markdown formatting** - Remove symbols, convert to HTML
+4. **Add styling** - Ensure black text, proper spacing
+5. **Generate client TOC** - Functional navigation component
+
+### Quality Validation
+- [ ] Single, clean table of contents
+- [ ] All text is black and readable
+- [ ] No markdown symbols visible
+- [ ] Functional navigation links
+- [ ] Proper heading hierarchy maintained (H1-H6)
+- [ ] Typography sizing and spacing consistent
+- [ ] Responsive text scaling applied
+- [ ] SEO structure preserved
+
+**For detailed implementation rules, see `context/agents/blog-formatter.md`**
+
 ## Output
-posts.status=published with published_at, verified image URLs, and complete asset manifest
+posts.status=published with published_at, verified image URLs, complete asset manifest, and formatting validation

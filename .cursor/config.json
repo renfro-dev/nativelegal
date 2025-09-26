@@ -1,0 +1,54 @@
+{
+  "$schema": "https://cursor.sh/schemas/v1/cursor.schema.json",
+  "contextPacks": ["/context/context-pack.yaml"],
+  "notes": "Agentic SEO Machine - Load context pack at session start; agents read role files and state.json.",
+  "rules": [
+    "Follow policies.md R-I-A-U orchestration loop",
+    "Single writer rule per step - assign clear ownership",
+    "Update state.json after each agent action",
+    "Require Reviewer approval before publishing/destructive ops",
+    "Legal compliance: disclaimers, primary sources, redact PII",
+    "Target: Nationwide USA law firm buyers (AI readiness, RevOps, workflows)"
+  ],
+  "includePattern": [
+    "**/*.{md,json,sql,ts,tsx,js,jsx}",
+    "**/supabase/**/*",
+    "**/context/**/*"
+  ],
+  "excludePattern": [
+    "**/node_modules/**",
+    "**/.git/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/.next/**"
+  ],
+  "pinFiles": [
+    "context/docs/PRD.md",
+    "context/docs/Blueprint.md", 
+    "context/docs/Tasks.md",
+    "context/agents/supervisor.md",
+    "context/orchestration/state.json",
+    "context/orchestration/decisions.md"
+  ],
+  "workspace": {
+    "defaultAgent": "supervisor",
+    "agentRoles": {
+      "supervisor": "context/agents/supervisor.md",
+      "reviewer": "context/agents/reviewer.md", 
+      "researcher": "context/agents/researcher.md",
+      "strategist": "context/agents/strategist.md",
+      "outliner": "context/agents/outliner.md",
+      "writer": "context/agents/writer.md",
+      "editor": "context/agents/editor.md",
+      "publisher": "context/agents/publisher.md",
+      "indexer": "context/agents/indexer.md",
+      "analyst": "context/agents/analyst.md",
+      "reflector": "context/agents/reflector.md"
+    }
+  },
+  "suggestions": {
+    "enabled": true,
+    "prioritizeContext": true,
+    "useRepoKnowledge": true
+  }
+}

@@ -27,9 +27,10 @@ build/
 .DS_Store
 Thumbs.db
 
-# Logs
+# Logs (but allow orchestration logs)
 logs/
 *.log
+!context/orchestration/logs/
 
 # Runtime data
 pids/
