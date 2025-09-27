@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import { Container } from '@/design-system'
 import { CheckCircle, Circle, ArrowRight, ArrowLeft, Calculator, FileText, Users, DollarSign, Server, Check, HelpCircle } from 'lucide-react'
+import SecondaryQuestionnaire from './SecondaryQuestionnaire'
 
 interface AssessmentStep {
   id: string
@@ -222,6 +223,9 @@ export default function AIReadinessCalculator() {
   const [answers, setAnswers] = useState<Record<string, number>>({})
   const [showResults, setShowResults] = useState(false)
   const [showLeadForm, setShowLeadForm] = useState(false)
+  const [showSecondaryQuestionnaire, setShowSecondaryQuestionnaire] = useState(false)
+  const [userId, setUserId] = useState<string>('')
+  const [assessmentId, setAssessmentId] = useState<string>('')
   const [leadData, setLeadData] = useState({
     name: '',
     email: '',
@@ -316,23 +320,35 @@ export default function AIReadinessCalculator() {
     }
   }
 
-  const handleLeadSubmit = (e: React.FormEvent) => {
+  const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
-    // Here you would typically send the data to your backend/CRM
-    const leadDataWithResults = {
-      ...leadData,
-      assessmentResults: calculateResults(),
-      timestamp: new Date().toISOString(),
-      source: 'AI Readiness Calculator'
+    try {
+      // Create user and assessment in Supabase
+      const response = await fetch('/api/calculator', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          user: leadData,
+          assessment: calculateResults(),
+          answers: answers
+        })
+      })
+      
+      const result = await response.json()
+      setUserId(result.userId)
+      setAssessmentId(result.assessmentId)
+      setShowLeadForm(false)
+      setShowSecondaryQuestionnaire(true)
+    } catch (error) {
+      console.error('Error submitting assessment:', error)
+      alert('There was an error processing your assessment. Please try again.')
     }
-    
-    console.log('Lead data:', leadDataWithResults)
-    
-    // Simulate API call
-    setTimeout(() => {
-      alert(`🎉 Thank you, ${leadData.name}! Your personalized AI implementation guide will be sent to ${leadData.email} within 24 hours.`)
-    }, 500)
+  }
+
+  const handleQuestionnaireComplete = (questionnaireId: string) => {
+    setShowSecondaryQuestionnaire(false)
+    alert(`🎉 Thank you, ${leadData.name}! Your personalized AI implementation guide will be sent to ${leadData.email} within 24 hours. We'll also reach out to schedule your consultation.`)
   }
 
   if (showResults) {
@@ -422,6 +438,16 @@ export default function AIReadinessCalculator() {
           </div>
         </div>
       </Container>
+    )
+  }
+
+  if (showSecondaryQuestionnaire) {
+    return (
+      <SecondaryQuestionnaire
+        userId={userId}
+        assessmentId={assessmentId}
+        onComplete={handleQuestionnaireComplete}
+      />
     )
   }
 
