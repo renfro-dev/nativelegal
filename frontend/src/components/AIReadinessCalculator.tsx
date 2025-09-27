@@ -607,6 +607,7 @@ export default function AIReadinessCalculator() {
   const isStepComplete = currentStepData.questions.every(q => answers[q.id])
   
   // Debug logging
+  // Debug logging for development
   console.log('Current step:', currentStep)
   console.log('Total steps:', assessmentSteps.length)
   console.log('Show results:', showResults)
