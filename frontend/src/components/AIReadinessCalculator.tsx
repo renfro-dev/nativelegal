@@ -307,9 +307,11 @@ export default function AIReadinessCalculator() {
   }
 
   const nextStep = () => {
+    console.log('Next step clicked. Current step:', currentStep, 'Total steps:', assessmentSteps.length)
     if (currentStep < assessmentSteps.length - 1) {
       setCurrentStep(currentStep + 1)
     } else {
+      console.log('Setting showResults to true')
       setShowResults(true)
     }
   }
@@ -598,6 +600,15 @@ export default function AIReadinessCalculator() {
 
   const currentStepData = assessmentSteps[currentStep]
   const isStepComplete = currentStepData.questions.every(q => answers[q.id])
+  
+  // Debug logging
+  console.log('Current step:', currentStep)
+  console.log('Total steps:', assessmentSteps.length)
+  console.log('Show results:', showResults)
+  console.log('Show lead form:', showLeadForm)
+  console.log('Show secondary questionnaire:', showSecondaryQuestionnaire)
+  console.log('Answers:', answers)
+  console.log('Is step complete:', isStepComplete)
 
   return (
     <Container className="py-16">
