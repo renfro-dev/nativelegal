@@ -2,7 +2,8 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowRight, Brain, Scale, TrendingUp, Users, Zap, FileText } from 'lucide-react'
+import { ArrowRight, Scale, TrendingUp, Users, Zap, FileText, Globe } from 'lucide-react'
+import Image from 'next/image'
 
 export default function HomePage() {
   return (
@@ -16,7 +17,7 @@ export default function HomePage() {
               animate={{ opacity: 1, x: 0 }}
               className="flex items-center space-x-2"
             >
-              <Brain className="w-8 h-8 text-blue-600" />
+              <Image src="/logo.svg" alt="Native Legal" width={32} height={32} />
               <span className="text-xl font-bold text-slate-900">Native Legal</span>
             </motion.div>
             <div className="hidden md:flex items-center space-x-8">
@@ -25,9 +26,6 @@ export default function HomePage() {
               </Link>
               <Link href="/blog" className="text-slate-700 hover:text-blue-600 transition-colors">
                 Legal AI Insights
-              </Link>
-              <Link href="/analytics" className="text-slate-700 hover:text-blue-600 transition-colors">
-                Analytics Dashboard
               </Link>
             </div>
           </div>
@@ -44,8 +42,8 @@ export default function HomePage() {
               transition={{ delay: 0.1 }}
               className="text-4xl lg:text-6xl font-bold text-slate-900 mb-6"
             >
-              AI Native Transformation Engine
-              <span className="block text-blue-600">for Law Firms</span>
+              Technology and Revenue Optimization Partner
+              <span className="block text-blue-600">for Family Law Firms</span>
             </motion.h1>
             
             <motion.p 
@@ -54,8 +52,7 @@ export default function HomePage() {
               transition={{ delay: 0.2 }}
               className="text-xl text-slate-600 max-w-4xl mx-auto mb-8"
             >
-              The AI Native Transformation Engine for Family Law Firms. 
-              Improve collections rates, modernize conflict checks, and reimagine your intake process.
+              We build AI Native law firms from the ground up, and help established firms to modernize, simplify, and modernize their practice.
             </motion.p>
 
             <motion.div 
@@ -68,14 +65,14 @@ export default function HomePage() {
                 href="/calculator"
                 className="inline-flex items-center px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors group"
               >
-                Start AI Readiness Assessment
+                Are you AI Ready?
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link 
                 href="/blog"
                 className="inline-flex items-center px-8 py-3 border border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-50 transition-colors"
               >
-                View Our Portfolio
+                Read our studies
               </Link>
             </motion.div>
           </div>
@@ -87,10 +84,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {[
+              { label: 'Intake Conversion Rate Increase', value: '42%', icon: Users },
               { label: 'Collections Rate Improvement', value: '25%', icon: TrendingUp },
-              { label: 'Conflict Check Time Reduction', value: '40%', icon: Scale },
-              { label: 'Intake Conversion Increase', value: '60%', icon: Users },
-              { label: 'Languages Supported', value: '100+', icon: Brain },
+              { label: 'Conflict Check Time Reduction', value: '95%', icon: Scale },
+              { label: 'Languages Supported', value: '100+', icon: Globe },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
@@ -212,7 +209,7 @@ export default function HomePage() {
               {
                 title: '24/7 Intake in 100+ Languages',
                 description: 'Never miss a potential client, regardless of language or time zone',
-                icon: Brain,
+                icon: Globe,
               },
               {
                 title: 'Collect with Compassion',
@@ -258,8 +255,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-700">
+      {/* Partnership Section */}
+      <section className="py-20 bg-gradient-to-r from-slate-800 to-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -267,17 +264,17 @@ export default function HomePage() {
             className="max-w-3xl mx-auto"
           >
             <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
-              Ready to Transform Your Family Law Practice?
+              We build and license with one established family law firm per US State.
             </h2>
-            <p className="text-xl text-blue-100 mb-8">
-              Join the AI-native transformation with solutions that put people first: 
-              accessibility, inclusivity, and human-centered AI.
+            <p className="text-xl text-slate-300 mb-8">
+              Partner with us to become the AI-native leader in your state. 
+              Exclusive partnerships ensure focused attention and maximum results.
             </p>
             <Link 
               href="/consultation"
-              className="inline-flex items-center px-8 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-colors group"
+              className="inline-flex items-center px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors group"
             >
-              Schedule Consultation
+              Book a meeting
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
@@ -289,11 +286,11 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <Brain className="w-6 h-6" />
-              <span className="text-lg font-semibold">SingleShot</span>
+              <Image src="/logo.svg" alt="Native Legal" width={24} height={24} />
+              <span className="text-lg font-semibold">Native Legal</span>
             </div>
             <p className="text-slate-400">
-              © 2024 SingleShot. AI Readiness x Revenue Optimization for Law Firms.
+              © 2024 Native Legal. AI Readiness x Revenue Optimization for Law Firms.
             </p>
           </div>
         </div>

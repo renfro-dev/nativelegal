@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, Calendar, Clock, Tag, Brain } from 'lucide-react'
+import { ArrowRight, Calendar, Clock, Tag } from 'lucide-react'
 import { getAllPosts } from '@/lib/posts'
 
 export default function BlogPage() {
@@ -16,8 +16,8 @@ export default function BlogPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center space-x-2">
-              <Brain className="w-8 h-8 text-blue-600" />
-              <span className="text-xl font-bold text-slate-900">SingleShot</span>
+              <Image src="/logo.svg" alt="Native Legal" width={32} height={32} />
+              <span className="text-xl font-bold text-slate-900">Native Legal</span>
             </Link>
             <div className="hidden md:flex items-center space-x-8">
               <Link href="/" className="text-slate-700 hover:text-blue-600 transition-colors">
@@ -40,39 +40,15 @@ export default function BlogPage() {
             className="text-center"
           >
             <h1 className="text-4xl lg:text-5xl font-bold mb-4">
-              Content Portfolio
+              Read our studies
             </h1>
             <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-              See how we position law firms as AI thought leaders with expert-level content that drives results.
-              <span className="block mt-2 font-semibold">25,053 words delivered for our clients</span>
+              Thought leadership at the nexus of technology and revenue.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Content Stats */}
-      <section className="py-8 bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
-            <div className="flex flex-col items-center">
-              <div className="text-2xl font-bold text-blue-600">6</div>
-              <div className="text-sm text-slate-600">Articles Delivered</div>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="text-2xl font-bold text-green-600">25,053</div>
-              <div className="text-sm text-slate-600">Words Written</div>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="text-2xl font-bold text-purple-600">$630K</div>
-              <div className="text-sm text-slate-600">Revenue Generated</div>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="text-2xl font-bold text-orange-600">3.37%</div>
-              <div className="text-sm text-slate-600">Conversion Rate</div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Blog Posts */}
       <section className="py-16">
@@ -165,16 +141,16 @@ export default function BlogPage() {
       <section className="py-16 bg-gradient-to-r from-slate-800 to-slate-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">
-            Ready to Position Your Firm as an AI Leader?
+            Are you ready for the future of family law?
           </h2>
           <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-            Let SingleShot create premium content that establishes your authority and drives qualified leads to your practice.
+            Meet with Native Legal for a comprehensive assessment of your technology, revenue systems, and AI readiness.
           </p>
           <Link 
-            href="/analytics"
+            href="/consultation"
             className="inline-flex items-center px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors group"
           >
-            See Our Results
+            Book a meeting with us
             <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>

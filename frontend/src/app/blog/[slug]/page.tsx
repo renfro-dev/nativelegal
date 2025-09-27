@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Calendar, Clock, Tag, ArrowLeft, Brain } from 'lucide-react'
+import { Calendar, Clock, Tag, ArrowLeft } from 'lucide-react'
 import { getPostBySlug, getAllPosts } from '@/lib/posts'
 import type { Metadata } from 'next'
 import fs from 'fs'
@@ -114,8 +114,8 @@ export default async function BlogPost({ params }: PageProps) {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center space-x-2">
-              <Brain className="w-8 h-8 text-blue-600" />
-              <span className="text-xl font-bold text-slate-900">SEO Machine</span>
+              <Image src="/logo.svg" alt="Native Legal" width={32} height={32} />
+              <span className="text-xl font-bold text-slate-900">Native Legal</span>
             </Link>
             <div className="hidden md:flex items-center space-x-8">
               <Link href="/" className="text-slate-700 hover:text-blue-600 transition-colors">
@@ -227,6 +227,7 @@ export default async function BlogPost({ params }: PageProps) {
                       6: 'text-base lg:text-lg font-semibold text-slate-900 mb-3 mt-4 leading-snug'
                     }
                     
+
                     const classes = typographyClasses[level as keyof typeof typographyClasses] || typographyClasses[6]
                     return `<h${level} id="${id}" class="scroll-mt-20 ${classes}">${cleanText}</h${level}>`
                   })
