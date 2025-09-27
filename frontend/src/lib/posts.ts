@@ -134,7 +134,7 @@ export function getPostBySlug(slug: string): Post | null {
 
 // Note: getPostContent is now handled server-side in the page component
 // This function is kept for compatibility but returns null
-export function getPostContent(_slug: string): string | null {
+export function getPostContent(): string | null {
   // This function is deprecated - content is now read server-side
   // in the page component to avoid client-side fs module issues
   return null
