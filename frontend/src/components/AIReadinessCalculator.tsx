@@ -318,9 +318,21 @@ export default function AIReadinessCalculator() {
 
   const handleLeadSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    
     // Here you would typically send the data to your backend/CRM
-    console.log('Lead data:', { ...leadData, assessmentResults: calculateResults() })
-    alert('Thank you! Your AI Readiness Assessment results will be sent to your email shortly.')
+    const leadDataWithResults = {
+      ...leadData,
+      assessmentResults: calculateResults(),
+      timestamp: new Date().toISOString(),
+      source: 'AI Readiness Calculator'
+    }
+    
+    console.log('Lead data:', leadDataWithResults)
+    
+    // Simulate API call
+    setTimeout(() => {
+      alert(`🎉 Thank you, ${leadData.name}! Your personalized AI implementation guide will be sent to ${leadData.email} within 24 hours.`)
+    }, 500)
   }
 
   if (showResults) {
@@ -389,12 +401,23 @@ export default function AIReadinessCalculator() {
             </div>
 
             <div className="text-center">
+              <div className="mb-4">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  🎯 Ready to Transform Your Practice?
+                </h3>
+                <p className="text-gray-600 mb-4">
+                  Get your personalized AI implementation roadmap with specific next steps, vendor recommendations, and timeline guidance.
+                </p>
+              </div>
               <button
                 onClick={() => setShowLeadForm(true)}
-                className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               >
-                Get Detailed Report & Implementation Guide
+                📋 Get My Personalized Implementation Guide
               </button>
+              <p className="text-sm text-gray-500 mt-3">
+                ✓ Free detailed report ✓ Vendor recommendations ✓ Timeline guidance ✓ No spam, ever
+              </p>
             </div>
           </div>
         </div>
@@ -408,11 +431,29 @@ export default function AIReadinessCalculator() {
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-4">
-              Get Your Detailed AI Readiness Report
+              🚀 Get Your Personalized AI Implementation Guide
             </h1>
-            <p className="text-lg text-gray-600">
-              Enter your details to receive a comprehensive implementation guide tailored to your assessment results
+            <p className="text-lg text-gray-600 mb-4">
+              Based on your <strong>{calculateResults().overall.toFixed(1)}/5.0 readiness score</strong>, we'll send you a detailed roadmap with:
             </p>
+            <div className="grid md:grid-cols-2 gap-4 max-w-2xl mx-auto text-sm text-gray-600">
+              <div className="flex items-center">
+                <span className="text-green-500 mr-2">✓</span>
+                Specific next steps for your firm
+              </div>
+              <div className="flex items-center">
+                <span className="text-green-500 mr-2">✓</span>
+                Vendor recommendations
+              </div>
+              <div className="flex items-center">
+                <span className="text-green-500 mr-2">✓</span>
+                Timeline and budget guidance
+              </div>
+              <div className="flex items-center">
+                <span className="text-green-500 mr-2">✓</span>
+                Risk mitigation strategies
+              </div>
+            </div>
           </div>
 
           <form onSubmit={handleLeadSubmit} className="bg-white rounded-lg shadow-lg p-8">
@@ -501,20 +542,27 @@ export default function AIReadinessCalculator() {
               </div>
             </div>
 
-            <div className="flex justify-between">
+            <div className="flex justify-between items-center">
               <button
                 type="button"
                 onClick={() => setShowLeadForm(false)}
-                className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                className="px-6 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
               >
-                Back to Results
+                ← Back to Results
               </button>
               <button
                 type="submit"
-                className="bg-blue-600 text-white px-8 py-2 rounded-md font-semibold hover:bg-blue-700 transition-colors"
+                className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-3 rounded-md font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl"
               >
-                Get My Report
+                🚀 Send My Implementation Guide
               </button>
+            </div>
+            
+            <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+              <p className="text-sm text-gray-600 text-center">
+                <strong>Privacy Promise:</strong> We respect your privacy and will never share your information. 
+                You'll receive your personalized guide within 24 hours, plus occasional insights on legal AI trends.
+              </p>
             </div>
           </form>
         </div>
