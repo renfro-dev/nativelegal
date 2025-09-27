@@ -66,8 +66,7 @@ async function getPostContent(slug: string): Promise<string | null> {
     // Try multiple possible paths for the content
     const possiblePaths = [
       path.join(process.cwd(), '..', 'content', 'posts', `${slug}.mdx`),
-      path.join(process.cwd(), 'content', 'posts', `${slug}.mdx`),
-      path.join(process.cwd(), '..', '..', 'content', 'posts', `${slug}.mdx`)
+      path.join(process.cwd(), 'content', 'posts', `${slug}.mdx`)
     ]
     
     let fileContents = null
