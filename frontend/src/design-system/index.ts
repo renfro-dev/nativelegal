@@ -4,12 +4,13 @@
  */
 
 // Tokens
-export * from './tokens/colors';
-export * from './tokens/typography';
+export { colors, cssVariables as colorCssVariables } from './tokens/colors';
+export { typography, cssVariables as typographyCssVariables } from './tokens/typography';
 export * from './tokens/spacing';
 
 // SEO Components
-export * from './components/SEO/SchemaMarkup';
+export { SchemaMarkup, LegalBusiness, Attorney, BreadcrumbList, FAQPage, Article as SchemaArticle } from './components/SEO/SchemaMarkup';
+export type { ArticleProps as SchemaArticleProps } from './components/SEO/SchemaMarkup';
 
 // Layout Components
 export * from './components/Layout/Container';

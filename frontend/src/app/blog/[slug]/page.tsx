@@ -228,7 +228,7 @@ export default async function BlogPost({ params }: PageProps) {
                       6: 'text-base lg:text-lg font-semibold text-slate-900 mb-3 mt-4 leading-snug'
                     }
                     
-                    const classes = typographyClasses[level] || typographyClasses[6]
+                    const classes = typographyClasses[level as keyof typeof typographyClasses] || typographyClasses[6]
                     return `<h${level} id="${id}" class="scroll-mt-20 ${classes}">${cleanText}</h${level}>`
                   })
                   // Clean up other markdown formatting

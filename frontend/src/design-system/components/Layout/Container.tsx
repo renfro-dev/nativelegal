@@ -13,6 +13,7 @@ export interface ContainerProps {
   className?: string;
   as?: 'div' | 'section' | 'article' | 'main' | 'aside' | 'header' | 'footer';
   id?: string;
+  role?: string;
   'data-testid'?: string;
 }
 

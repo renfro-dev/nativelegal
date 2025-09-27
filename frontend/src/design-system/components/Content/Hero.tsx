@@ -7,6 +7,7 @@ import React from 'react';
 import { Container } from '../Layout/Container';
 
 export interface HeroProps {
+  children?: React.ReactNode;
   title: string;
   subtitle?: string;
   description?: string;
