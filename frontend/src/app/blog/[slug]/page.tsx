@@ -76,7 +76,7 @@ async function getPostContent(slug: string): Promise<string | null> {
           fileContents = fs.readFileSync(contentPath, 'utf8')
           break
         }
-      } catch (e) {
+      } catch {
         continue
       }
     }

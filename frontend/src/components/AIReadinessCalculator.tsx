@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { Container } from '@/design-system'
-import { CheckCircle, Circle, ArrowRight, ArrowLeft, Calculator, FileText, Users, DollarSign, Server, Check, HelpCircle } from 'lucide-react'
+import { CheckCircle, ArrowRight, ArrowLeft, Calculator, FileText, Users, DollarSign, Server, Check, HelpCircle } from 'lucide-react'
 import SecondaryQuestionnaire from './SecondaryQuestionnaire'
 
 interface AssessmentStep {
@@ -348,9 +348,9 @@ export default function AIReadinessCalculator() {
     }
   }
 
-  const handleQuestionnaireComplete = (questionnaireId: string) => {
+  const handleQuestionnaireComplete = () => {
     setShowSecondaryQuestionnaire(false)
-    alert(`🎉 Thank you, ${leadData.name}! Your personalized AI implementation guide will be sent to ${leadData.email} within 24 hours. We'll also reach out to schedule your consultation.`)
+    alert(`🎉 Perfect, ${leadData.name}! We have everything we need to prepare for your video consultation. Our team will reach out within 24 hours to schedule your personalized AI strategy session.`)
   }
 
   if (showResults) {
@@ -366,7 +366,7 @@ export default function AIReadinessCalculator() {
               Your AI Readiness Assessment Results
             </h1>
             <p className="text-xl text-gray-600">
-              Based on your responses, here's your comprehensive AI readiness evaluation
+              Based on your responses, here&apos;s your comprehensive AI readiness evaluation
             </p>
           </div>
 
@@ -468,7 +468,7 @@ export default function AIReadinessCalculator() {
               🚀 Get Your Personalized AI Implementation Guide
             </h1>
             <p className="text-lg text-gray-600 mb-4">
-              Based on your <strong>{calculateResults().overall.toFixed(1)}/5.0 readiness score</strong>, we'll create a customized implementation roadmap for your firm. First, tell us a bit about your practice:
+              Based on your <strong>{calculateResults().overall.toFixed(1)}/5.0 readiness score</strong>, we&apos;ll create a customized implementation roadmap for your firm. First, tell us a bit about your practice:
             </p>
             <div className="grid md:grid-cols-2 gap-4 max-w-2xl mx-auto text-sm text-gray-600">
               <div className="flex items-center">
@@ -588,13 +588,13 @@ export default function AIReadinessCalculator() {
                 type="submit"
                 className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-3 rounded-md font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl"
               >
-                📋 Continue to Detailed Assessment
+                📋 Prepare for Video Consultation
               </button>
             </div>
             
             <div className="mt-6 p-4 bg-gray-50 rounded-lg">
               <p className="text-sm text-gray-600 text-center">
-                <strong>Next Step:</strong> After completing this form, we'll ask a few more questions about your technology stack and firm structure to create your personalized AI implementation roadmap.
+                <strong>Next Step:</strong> We&apos;ll ask a few more questions about your technology stack and firm structure to prepare for your personalized video consultation.
               </p>
             </div>
           </form>
@@ -629,7 +629,7 @@ export default function AIReadinessCalculator() {
             AI Readiness Assessment Calculator
           </h1>
           <p className="text-xl text-gray-600 mb-8">
-            Evaluate your law firm's readiness for AI implementation with our comprehensive assessment tool
+            Evaluate your law firm&apos;s readiness for AI implementation with our comprehensive assessment tool
           </p>
           
           {/* Progress Bar */}

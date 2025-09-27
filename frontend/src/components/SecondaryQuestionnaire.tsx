@@ -270,7 +270,7 @@ export default function SecondaryQuestionnaire({ userId, assessmentId, onComplet
     preferred_communication: ''
   })
 
-  const handleInputChange = (questionId: string, value: any) => {
+  const handleInputChange = (questionId: string, value: string | string[]) => {
     setData(prev => ({ ...prev, [questionId]: value }))
   }
 
@@ -318,10 +318,10 @@ export default function SecondaryQuestionnaire({ userId, assessmentId, onComplet
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Tell Us More About Your Firm
+            Prepare for Your Video Consultation
           </h1>
           <p className="text-xl text-gray-600 mb-8">
-            Help us prepare for your consultation with detailed information about your practice
+            Share details about your firm so we can make the most of our upcoming video meeting and provide targeted recommendations
           </p>
           
           {/* Progress Bar */}
@@ -384,9 +384,9 @@ export default function SecondaryQuestionnaire({ userId, assessmentId, onComplet
                       <label key={option} className="flex items-center">
                         <input
                           type="checkbox"
-                          checked={(data[question.id as keyof QuestionnaireData] as string[] || []).includes(option)}
+                          checked={Array.isArray(data[question.id as keyof QuestionnaireData]) ? (data[question.id as keyof QuestionnaireData] as unknown as string[]).includes(option) : false}
                           onChange={(e) => {
-                            const current = data[question.id as keyof QuestionnaireData] as string[] || []
+                            const current = Array.isArray(data[question.id as keyof QuestionnaireData]) ? data[question.id as keyof QuestionnaireData] as unknown as string[] : []
                             const updated = e.target.checked 
                               ? [...current, option]
                               : current.filter(item => item !== option)

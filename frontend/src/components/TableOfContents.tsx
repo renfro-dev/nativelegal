@@ -19,7 +19,7 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ content }) => 
              !text.includes('introduction') &&
              !text.includes('summary')
     })
-    .map((heading, index) => {
+    .map((heading) => {
       const level = heading.match(/^#+/)?.[0].length || 1
       const text = heading.replace(/^#+\s*/, '').trim()
       const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-')
@@ -49,9 +49,9 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ content }) => 
     <div className="bg-slate-50 border border-slate-200 rounded-lg p-6 mb-8">
       <h3 className="text-lg font-semibold text-slate-900 mb-4">Table of Contents</h3>
       <div className="space-y-2" id="table-of-contents">
-        {headings.map((heading, index) => (
+        {headings.map((heading) => (
           <a
-            key={index}
+            key={heading.id}
             href={`#${heading.id}`}
             className={`block text-sm text-blue-600 hover:text-blue-800 hover:underline ${heading.indent}`}
             onClick={(e) => handleClick(e, heading.id)}

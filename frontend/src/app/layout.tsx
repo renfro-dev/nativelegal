@@ -6,6 +6,7 @@ import Script from 'next/script'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://native.legal'),
   title: 'Native Legal - AI Native Transformation Engine for Law Firms',
   description: 'Automate operations and modernized practice management.',
   keywords: [
@@ -100,10 +101,10 @@ export default function RootLayout({
             {
               "@context": "https://schema.org",
               "@type": "Organization",
-              "name": "SingleShot",
+              "name": "Native Legal",
               "description": "AI Readiness x Revenue Optimization for Law Firms",
-              "url": "https://singleshot.legal",
-              "logo": "https://singleshot.legal/logo.png",
+              "url": "https://nativelegal.com",
+              "logo": "https://nativelegal.com/logo.svg",
               "sameAs": [
                 "https://twitter.com/seomachine",
                 "https://linkedin.com/company/seomachine"
@@ -125,15 +126,15 @@ export default function RootLayout({
             {
               "@context": "https://schema.org",
               "@type": "Blog",
-              "name": "SingleShot Portfolio",
-              "description": "Premium AI-focused content that positions law firms as thought leaders",
-              "url": "https://singleshot.legal/blog",
+              "name": "Native Legal Studies",
+              "description": "Thought leadership at the nexus of technology and revenue for law firms",
+              "url": "https://nativelegal.com/blog",
               "publisher": {
                 "@type": "Organization",
-                "name": "SingleShot",
-                "logo": "https://singleshot.legal/logo.png"
+                "name": "Native Legal",
+                "logo": "https://nativelegal.com/logo.svg"
               },
-              "mainEntityOfPage": "https://singleshot.legal/blog"
+              "mainEntityOfPage": "https://nativelegal.com/blog"
             }
           `}
         </Script>
