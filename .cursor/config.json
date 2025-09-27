@@ -30,7 +30,8 @@
     "context/docs/Tasks.md",
     "context/agents/supervisor.md",
     "context/orchestration/state.json",
-    "context/orchestration/decisions.md"
+    "context/orchestration/decisions.md",
+    "context/orchestration/orchestration_policy.md"
   ],
   "workspace": {
     "defaultAgent": "supervisor",
