@@ -29,6 +29,7 @@
     "context/docs/Blueprint.md", 
     "context/docs/Tasks.md",
     "context/agents/supervisor.md",
+    "context/agents/AGENT_WORKFLOW_REFERENCE.md",
     "context/orchestration/state.json",
     "context/orchestration/decisions.md",
     "context/orchestration/orchestration_policy.md"
