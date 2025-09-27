@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { Container } from '@/design-system'
-import { CheckCircle, Circle, ArrowRight, ArrowLeft, Calculator, FileText, Users, DollarSign, Server, Check } from 'lucide-react'
+import { CheckCircle, Circle, ArrowRight, ArrowLeft, Calculator, FileText, Users, DollarSign, Server, Check, HelpCircle } from 'lucide-react'
 
 interface AssessmentStep {
   id: string
@@ -16,6 +16,7 @@ interface AssessmentStep {
 interface Question {
   id: string
   text: string
+  helpText?: string
   options: {
     value: number
     label: string
@@ -44,6 +45,7 @@ const assessmentSteps: AssessmentStep[] = [
       {
         id: 'infra-1',
         text: 'What best describes your current technology infrastructure?',
+        helpText: 'Consider your practice management software, document management systems, and how well they integrate with each other. Cloud-native means your systems are designed for the cloud with modern APIs.',
         options: [
           { value: 5, label: 'Cloud-native systems', description: 'Robust APIs and integration capabilities' },
           { value: 4, label: 'Modern systems', description: 'Good integration potential, minimal technical debt' },
@@ -55,6 +57,7 @@ const assessmentSteps: AssessmentStep[] = [
       {
         id: 'infra-2',
         text: 'How would you rate your system integration capabilities?',
+        helpText: 'Think about how easily your practice management software, document management, billing systems, and other tools work together. Can data flow between systems automatically?',
         options: [
           { value: 5, label: 'Excellent', description: 'Seamless integration with modern APIs' },
           { value: 4, label: 'Good', description: 'Most systems integrate well' },
@@ -66,6 +69,7 @@ const assessmentSteps: AssessmentStep[] = [
       {
         id: 'infra-3',
         text: 'What is your current security and compliance posture?',
+        helpText: 'Consider your data encryption, access controls, backup systems, and compliance with legal industry standards. Do you have formal security policies and regular security audits?',
         options: [
           { value: 5, label: 'Enterprise-grade', description: 'Comprehensive security framework' },
           { value: 4, label: 'Strong', description: 'Good security practices in place' },
@@ -86,6 +90,7 @@ const assessmentSteps: AssessmentStep[] = [
       {
         id: 'data-1',
         text: 'How would you describe your data organization?',
+        helpText: 'Think about how your client files, case documents, and matter information are organized. Are they consistently named, properly categorized, and easy to find?',
         options: [
           { value: 5, label: 'Excellent', description: 'Well-organized with strong governance' },
           { value: 4, label: 'Good', description: 'Generally organized, minor issues' },
@@ -97,6 +102,7 @@ const assessmentSteps: AssessmentStep[] = [
       {
         id: 'data-2',
         text: 'What is your data quality and accessibility level?',
+        helpText: 'Consider the accuracy and completeness of your client information, case data, and documents. Is information up-to-date, properly formatted, and easily searchable?',
         options: [
           { value: 5, label: 'High quality', description: 'Clean, accessible, well-documented' },
           { value: 4, label: 'Good quality', description: 'Mostly clean and accessible' },
@@ -108,6 +114,7 @@ const assessmentSteps: AssessmentStep[] = [
       {
         id: 'data-3',
         text: 'How mature are your data governance processes?',
+        helpText: 'Data governance includes policies for data access, retention, privacy, and quality control. Do you have formal procedures for who can access what data, how long to keep it, and how to maintain its quality?',
         options: [
           { value: 5, label: 'Mature', description: 'Comprehensive governance framework' },
           { value: 4, label: 'Developing', description: 'Good governance practices' },
@@ -128,6 +135,7 @@ const assessmentSteps: AssessmentStep[] = [
       {
         id: 'org-1',
         text: 'How would you rate leadership alignment on AI adoption?',
+        helpText: 'Consider whether partners and senior leadership are committed to AI implementation, willing to invest resources, and have experience successfully managing technology changes in the firm.',
         options: [
           { value: 5, label: 'Strong alignment', description: 'Proven change management capabilities' },
           { value: 4, label: 'Good support', description: 'Adequate change management experience' },
@@ -139,6 +147,7 @@ const assessmentSteps: AssessmentStep[] = [
       {
         id: 'org-2',
         text: 'What is your staff\'s readiness for technology change?',
+        helpText: 'Think about how comfortable your attorneys, paralegals, and support staff are with new technology. Do they adapt quickly to new systems, or do they resist change?',
         options: [
           { value: 5, label: 'Highly ready', description: 'Strong technology skills and adaptability' },
           { value: 4, label: 'Ready', description: 'Good technology comfort levels' },
@@ -150,6 +159,7 @@ const assessmentSteps: AssessmentStep[] = [
       {
         id: 'org-3',
         text: 'How effective is your training and development infrastructure?',
+        helpText: 'Consider your firm\'s ability to train staff on new systems. Do you have dedicated training resources, ongoing professional development programs, and experience successfully training staff on new technology?',
         options: [
           { value: 5, label: 'Excellent', description: 'Comprehensive training programs' },
           { value: 4, label: 'Good', description: 'Adequate training resources' },
@@ -170,6 +180,7 @@ const assessmentSteps: AssessmentStep[] = [
       {
         id: 'fin-1',
         text: 'What is your budget allocation for AI implementation?',
+        helpText: 'Consider your firm\'s financial capacity for AI investment, including software licensing, implementation costs, training, and ongoing support. What percentage of your annual technology budget could be allocated to AI?',
         options: [
           { value: 5, label: 'Substantial budget', description: 'Flexible investment approach' },
           { value: 4, label: 'Adequate budget', description: 'Clear ROI expectations' },
@@ -181,6 +192,7 @@ const assessmentSteps: AssessmentStep[] = [
       {
         id: 'fin-2',
         text: 'How would you rate your ROI measurement capabilities?',
+        helpText: 'Think about your firm\'s ability to track and measure the return on technology investments. Do you have systems to measure productivity gains, cost savings, and revenue improvements from new technology?',
         options: [
           { value: 5, label: 'Advanced', description: 'Sophisticated measurement frameworks' },
           { value: 4, label: 'Good', description: 'Clear measurement processes' },
@@ -192,6 +204,7 @@ const assessmentSteps: AssessmentStep[] = [
       {
         id: 'fin-3',
         text: 'What is your investment timeline flexibility?',
+        helpText: 'Consider your firm\'s expectations for seeing returns on AI investment. Are you willing to invest for the long term, or do you need to see immediate results? AI implementation typically takes 6-18 months to show significant ROI.',
         options: [
           { value: 5, label: 'Very flexible', description: 'Long-term investment horizon' },
           { value: 4, label: 'Flexible', description: 'Reasonable timeline expectations' },
@@ -561,9 +574,15 @@ export default function AIReadinessCalculator() {
           <div className="space-y-8">
             {currentStepData.questions.map((question, qIndex) => (
               <div key={question.id} className="border-b border-gray-200 pb-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   {qIndex + 1}. {question.text}
                 </h3>
+                {question.helpText && (
+                  <div className="flex items-start mb-4 p-3 bg-blue-50 rounded-lg">
+                    <HelpCircle className="w-4 h-4 text-blue-600 mt-0.5 mr-2 flex-shrink-0" />
+                    <p className="text-sm text-blue-800">{question.helpText}</p>
+                  </div>
+                )}
                 <div className="space-y-3">
                   {question.options.map((option) => (
                     <label
