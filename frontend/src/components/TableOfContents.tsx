@@ -19,7 +19,7 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ content }) => 
              !text.includes('introduction') &&
              !text.includes('summary')
     })
-    .map((heading) => {
+    .map((heading, _index) => {
       const level = heading.match(/^#+/)?.[0].length || 1
       const text = heading.replace(/^#+\s*/, '').trim()
       const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-')

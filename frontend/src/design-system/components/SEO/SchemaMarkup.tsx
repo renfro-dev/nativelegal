@@ -7,7 +7,7 @@ import React from 'react';
 
 export interface SchemaMarkupProps {
   type: 'LegalBusiness' | 'Attorney' | 'Organization' | 'WebSite' | 'BreadcrumbList' | 'FAQPage' | 'Article';
-  data: Record<string, unknown>;
+  data: Record<string, any>;
   children?: React.ReactNode;
 }
 
