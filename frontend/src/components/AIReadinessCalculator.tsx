@@ -355,6 +355,7 @@ export default function AIReadinessCalculator() {
 
   if (showResults) {
     const results = calculateResults()
+    console.log('Rendering results page with CTA button')
     
     return (
       <Container className="py-16">
@@ -428,7 +429,10 @@ export default function AIReadinessCalculator() {
                 </p>
               </div>
               <button
-                onClick={() => setShowLeadForm(true)}
+                onClick={() => {
+                  console.log('CTA button clicked, setting showLeadForm to true')
+                  setShowLeadForm(true)
+                }}
                 className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               >
                 📋 Get My Personalized Implementation Guide
