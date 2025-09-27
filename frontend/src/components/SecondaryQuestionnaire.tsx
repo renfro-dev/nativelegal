@@ -20,21 +20,12 @@ interface QuestionnaireData {
   integration_challenges: string
   
   // Organizational structure
-  decision_makers: Array<{
-    name: string
-    role: string
-    email: string
-    influence_level: string
-  }>
   change_management_experience: string
-  training_budget_annual: string
   staff_technology_comfort: string
   previous_ai_experience: string
   
   // Financial details
   annual_revenue_range: string
-  technology_budget_annual: string
-  ai_investment_budget: string
   roi_expectations: string
   implementation_timeline: string
   
@@ -135,17 +126,6 @@ const questionnaireSteps = [
     icon: <Users className="w-6 h-6" />,
     questions: [
       {
-        id: 'decision_makers',
-        label: 'Who are the key decision makers for technology investments?',
-        type: 'dynamic',
-        fields: [
-          { name: 'name', label: 'Name', type: 'text' },
-          { name: 'role', label: 'Role', type: 'text' },
-          { name: 'email', label: 'Email', type: 'email' },
-          { name: 'influence_level', label: 'Influence Level', type: 'select', options: ['High', 'Medium', 'Low'] }
-        ]
-      },
-      {
         id: 'change_management_experience',
         label: 'How would you rate your firm\'s experience with technology change management?',
         type: 'select',
@@ -155,19 +135,6 @@ const questionnaireSteps = [
           'Moderate - We\'ve had mixed success with technology implementations',
           'Limited - We struggle with technology changes',
           'Poor - We have a history of failed technology implementations'
-        ]
-      },
-      {
-        id: 'training_budget_annual',
-        label: 'What is your annual training budget per employee?',
-        type: 'select',
-        options: [
-          '$5,000+',
-          '$2,500 - $4,999',
-          '$1,000 - $2,499',
-          '$500 - $999',
-          'Less than $500',
-          'No formal training budget'
         ]
       },
       {
@@ -213,33 +180,6 @@ const questionnaireSteps = [
           '$1M - $1.9M',
           '$500K - $999K',
           'Less than $500K'
-        ]
-      },
-      {
-        id: 'technology_budget_annual',
-        label: 'What is your annual technology budget?',
-        type: 'select',
-        options: [
-          '$500K+',
-          '$250K - $499K',
-          '$100K - $249K',
-          '$50K - $99K',
-          '$25K - $49K',
-          'Less than $25K'
-        ]
-      },
-      {
-        id: 'ai_investment_budget',
-        label: 'What is your budget for AI implementation over the next 18 months?',
-        type: 'select',
-        options: [
-          '$200K+',
-          '$100K - $199K',
-          '$50K - $99K',
-          '$25K - $49K',
-          '$10K - $24K',
-          'Less than $10K',
-          'Undecided'
         ]
       },
       {
@@ -318,14 +258,10 @@ export default function SecondaryQuestionnaire({ userId, assessmentId, onComplet
     cloud_adoption_level: '',
     security_certifications: '',
     integration_challenges: '',
-    decision_makers: [],
     change_management_experience: '',
-    training_budget_annual: '',
     staff_technology_comfort: '',
     previous_ai_experience: '',
     annual_revenue_range: '',
-    technology_budget_annual: '',
-    ai_investment_budget: '',
     roi_expectations: '',
     implementation_timeline: '',
     primary_pain_points: '',
@@ -338,28 +274,6 @@ export default function SecondaryQuestionnaire({ userId, assessmentId, onComplet
     setData(prev => ({ ...prev, [questionId]: value }))
   }
 
-  const addDecisionMaker = () => {
-    setData(prev => ({
-      ...prev,
-      decision_makers: [...prev.decision_makers, { name: '', role: '', email: '', influence_level: 'Medium' }]
-    }))
-  }
-
-  const updateDecisionMaker = (index: number, field: string, value: string) => {
-    setData(prev => ({
-      ...prev,
-      decision_makers: prev.decision_makers.map((dm, i) => 
-        i === index ? { ...dm, [field]: value } : dm
-      )
-    }))
-  }
-
-  const removeDecisionMaker = (index: number) => {
-    setData(prev => ({
-      ...prev,
-      decision_makers: prev.decision_makers.filter((_, i) => i !== index)
-    }))
-  }
 
   const nextStep = () => {
     if (currentStep < questionnaireSteps.length - 1) {
@@ -396,9 +310,6 @@ export default function SecondaryQuestionnaire({ userId, assessmentId, onComplet
 
   const currentStepData = questionnaireSteps[currentStep]
   const isStepComplete = currentStepData.questions.every(q => {
-    if (q.id === 'decision_makers') {
-      return data.decision_makers.length > 0
-    }
     return data[q.id as keyof QuestionnaireData] !== ''
   })
 
@@ -499,60 +410,6 @@ export default function SecondaryQuestionnaire({ userId, assessmentId, onComplet
                   />
                 )}
 
-                {question.type === 'dynamic' && question.id === 'decision_makers' && (
-                  <div className="space-y-4">
-                    {data.decision_makers.map((dm, index) => (
-                      <div key={index} className="p-4 border border-gray-200 rounded-lg">
-                        <div className="grid md:grid-cols-2 gap-4 mb-4">
-                          <input
-                            type="text"
-                            placeholder="Name"
-                            value={dm.name}
-                            onChange={(e) => updateDecisionMaker(index, 'name', e.target.value)}
-                            className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          />
-                          <input
-                            type="text"
-                            placeholder="Role"
-                            value={dm.role}
-                            onChange={(e) => updateDecisionMaker(index, 'role', e.target.value)}
-                            className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          />
-                          <input
-                            type="email"
-                            placeholder="Email"
-                            value={dm.email}
-                            onChange={(e) => updateDecisionMaker(index, 'email', e.target.value)}
-                            className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          />
-                          <select
-                            value={dm.influence_level}
-                            onChange={(e) => updateDecisionMaker(index, 'influence_level', e.target.value)}
-                            className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                          >
-                            <option value="High">High Influence</option>
-                            <option value="Medium">Medium Influence</option>
-                            <option value="Low">Low Influence</option>
-                          </select>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => removeDecisionMaker(index)}
-                          className="text-red-600 hover:text-red-800 text-sm"
-                        >
-                          Remove
-                        </button>
-                      </div>
-                    ))}
-                    <button
-                      type="button"
-                      onClick={addDecisionMaker}
-                      className="px-4 py-2 border border-blue-300 text-blue-600 rounded-md hover:bg-blue-50"
-                    >
-                      + Add Decision Maker
-                    </button>
-                  </div>
-                )}
               </div>
             ))}
           </div>

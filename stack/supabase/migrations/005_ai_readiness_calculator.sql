@@ -42,16 +42,12 @@ CREATE TABLE IF NOT EXISTS secondary_questionnaire (
     integration_challenges TEXT,
     
     -- Organizational structure
-    decision_makers JSONB DEFAULT '[]', -- Array of decision maker info
     change_management_experience TEXT,
-    training_budget_annual TEXT,
     staff_technology_comfort TEXT,
     previous_ai_experience TEXT,
     
     -- Financial details
     annual_revenue_range TEXT,
-    technology_budget_annual TEXT,
-    ai_investment_budget TEXT,
     roi_expectations TEXT,
     implementation_timeline TEXT,
     
