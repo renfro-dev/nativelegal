@@ -20,6 +20,9 @@ export default function HomePage() {
               <span className="text-xl font-bold text-slate-900">Native Legal</span>
             </motion.div>
             <div className="hidden md:flex items-center space-x-8">
+              <Link href="/calculator" className="text-slate-700 hover:text-blue-600 transition-colors">
+                AI Readiness Calculator
+              </Link>
               <Link href="/blog" className="text-slate-700 hover:text-blue-600 transition-colors">
                 Legal AI Insights
               </Link>
@@ -62,17 +65,17 @@ export default function HomePage() {
               className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
               <Link 
-                href="/blog"
+                href="/calculator"
                 className="inline-flex items-center px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors group"
               >
-                View Our Portfolio
+                Start AI Readiness Assessment
                 <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link 
-                href="/analytics"
+                href="/blog"
                 className="inline-flex items-center px-8 py-3 border border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-50 transition-colors"
               >
-                See Performance Results
+                View Our Portfolio
               </Link>
             </motion.div>
           </div>
