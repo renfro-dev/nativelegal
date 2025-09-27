@@ -74,8 +74,8 @@ async function getPostContent(slug: string): Promise<string | null> {
     }
     
     return null
-  } catch (error) {
-    console.error(`Error reading post content for ${slug}:`, error)
+  } catch {
+    console.error(`Error reading post content for ${slug}`)
     return null
   }
 }
