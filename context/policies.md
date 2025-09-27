@@ -4,6 +4,27 @@
 3) Act: Smallest, reversible change; prefer PR/branch.
 4) Update: Append outcome to orchestration/logs and update state.json.
 
+## Logging Requirements (Step 4)
+**MANDATORY:** After each agent action, the Supervisor MUST:
+1. **Log the action** - Append detailed entry to `context/orchestration/logs/YYYY-MM-DD-agent-actions.md`
+2. **Update state.json** - Add progress entry with timestamp, action, and outcome
+3. **Update decisions.md** - Add rationale for major decisions
+
+### Log Entry Format:
+```markdown
+### HH:MM:SSZ - AgentName
+**Action:** Brief description of the action performed
+**Input:** What was required to perform this action
+**Output:** What was produced or achieved
+**Status:** ✅ Completed / ❌ Failed / 🚧 In Progress
+**Next:** What action should follow this one
+```
+
+### Daily Log File:
+- **Format:** `YYYY-MM-DD-agent-actions.md`
+- **Location:** `context/orchestration/logs/`
+- **Purpose:** Detailed record of all agent actions performed on a specific date
+
 ## Rules
 - Single Writer Rule per step.
 - Reviewer Gate before merges/deletions/secrets/publishing.
