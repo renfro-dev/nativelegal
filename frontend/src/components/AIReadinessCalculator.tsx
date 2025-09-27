@@ -432,6 +432,7 @@ export default function AIReadinessCalculator() {
                 onClick={() => {
                   console.log('CTA button clicked, setting showLeadForm to true')
                   setShowLeadForm(true)
+                  setShowResults(false) // Hide results page
                 }}
                 className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-4 rounded-lg font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               >
@@ -458,6 +459,7 @@ export default function AIReadinessCalculator() {
   }
 
   if (showLeadForm) {
+    console.log('Rendering lead form')
     return (
       <Container className="py-16">
         <div className="max-w-2xl mx-auto">
@@ -466,7 +468,7 @@ export default function AIReadinessCalculator() {
               🚀 Get Your Personalized AI Implementation Guide
             </h1>
             <p className="text-lg text-gray-600 mb-4">
-              Based on your <strong>{calculateResults().overall.toFixed(1)}/5.0 readiness score</strong>, we'll send you a detailed roadmap with:
+              Based on your <strong>{calculateResults().overall.toFixed(1)}/5.0 readiness score</strong>, we'll create a customized implementation roadmap for your firm. First, tell us a bit about your practice:
             </p>
             <div className="grid md:grid-cols-2 gap-4 max-w-2xl mx-auto text-sm text-gray-600">
               <div className="flex items-center">
@@ -586,14 +588,13 @@ export default function AIReadinessCalculator() {
                 type="submit"
                 className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-3 rounded-md font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl"
               >
-                🚀 Send My Implementation Guide
+                📋 Continue to Detailed Assessment
               </button>
             </div>
             
             <div className="mt-6 p-4 bg-gray-50 rounded-lg">
               <p className="text-sm text-gray-600 text-center">
-                <strong>Privacy Promise:</strong> We respect your privacy and will never share your information. 
-                You'll receive your personalized guide within 24 hours, plus occasional insights on legal AI trends.
+                <strong>Next Step:</strong> After completing this form, we'll ask a few more questions about your technology stack and firm structure to create your personalized AI implementation roadmap.
               </p>
             </div>
           </form>
@@ -613,6 +614,11 @@ export default function AIReadinessCalculator() {
   console.log('Show secondary questionnaire:', showSecondaryQuestionnaire)
   console.log('Answers:', answers)
   console.log('Is step complete:', isStepComplete)
+  
+  // Check render order
+  if (showResults && showLeadForm) {
+    console.log('⚠️ Both showResults and showLeadForm are true - this should not happen')
+  }
 
   return (
     <Container className="py-16">
