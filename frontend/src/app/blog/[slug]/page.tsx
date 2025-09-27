@@ -11,9 +11,9 @@ import { MDXRemote } from 'next-mdx-remote/rsc'
 import matter from 'gray-matter'
 
 interface BlogPostPageProps {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
 export async function generateStaticParams() {
@@ -24,7 +24,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-  const post = getPostBySlug(params.slug)
+  const { slug } = await params
+  const post = getPostBySlug(slug)
   
   if (!post) {
     return {
@@ -80,13 +81,14 @@ async function getPostContent(slug: string): Promise<string | null> {
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = getPostBySlug(params.slug)
-  
+  const { slug } = await params
+  const post = getPostBySlug(slug)
+
   if (!post) {
     notFound()
   }
 
-  const content = await getPostContent(params.slug)
+  const content = await getPostContent(slug)
   
   if (!content) {
     return (

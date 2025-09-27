@@ -4,5 +4,10 @@
       "src": "frontend/package.json",
       "use": "@vercel/next"
     }
-  ]
+  ],
+  "functions": {
+    "frontend/**": {
+      "runtime": "nodejs18.x"
+    }
+  }
 }
