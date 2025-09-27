@@ -10,6 +10,8 @@ Generate professional, contextually-relevant images for blog posts using AI, ens
 - **Brand Consistency:** Maintain visual style guidelines across all generated content
 - **Visual Excellence:** Focus purely on creating stunning, professional visuals that enhance content
 
+**Reference:** Follow technical specifications in `context/docs/image_seo_spec.md`
+
 ## Inputs
 - posts.status=scheduled (from Editor)
 - Article title, description, category, tags

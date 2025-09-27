@@ -26,6 +26,8 @@ After Visual Designer generates images:
 - **Keyword Integration:** Ensure all image metadata aligns with target keywords from Strategist
 - **Image Context:** Leverage deep content understanding to create contextually perfect SEO metadata
 
+**Reference:** Follow complete specifications in `context/docs/image_seo_spec.md`
+
 ## Output
 posts.status=scheduled (ready for Visual Designer)
 After image review: posts.status=visual_approved (ready for Publisher)

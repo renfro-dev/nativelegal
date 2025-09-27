@@ -27,6 +27,8 @@ Publish complete content with images via static MDX, update sitemap/RSS, verify 
 - **File Name SEO:** Confirm all images use SEO-optimized file names
 - **Image Lazy Loading:** Implement performance optimization for image loading
 
+**Reference:** Follow complete implementation guide in `context/docs/image_seo_spec.md`
+
 ## Quality Gates
 - All generated images must be accessible via CDN
 - Image loading times must be <2 seconds
