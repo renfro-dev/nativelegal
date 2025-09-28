@@ -2,7 +2,7 @@
   "buildCommand": "cd frontend && npm run build",
   "outputDirectory": "frontend/.next",
   "functions": {
-    "frontend/**": {
+    "**": {
       "runtime": "nodejs18.x"
     }
   }

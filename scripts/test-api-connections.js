@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+p1#!/usr/bin/env node
 
 /**
  * API Connection Test Suite
@@ -126,25 +126,20 @@ async function testAPIConnections() {
     results.total++;
     console.log('\n🗄️  Testing Supabase Connection...');
     try {
-        if (process.env.SUPABASE_URL && process.env.SUPABASE_ANON_KEY) {
-            const response = await fetch(`${process.env.SUPABASE_URL}/rest/v1/sources?select=count&limit=0`, {
-                headers: {
-                    'apikey': process.env.SUPABASE_ANON_KEY
-                }
-            });
-        
-            if (response.ok) {
-                console.log('✅ Supabase connection successful');
-                console.log(`   Database: Accessible`);
-                results.passed++;
-            } else {
-                console.log('❌ Supabase connection failed');
-                console.log(`   Status: ${response.status}`);
-                results.failed++;
+        const supabaseUrl = 'https://gmcdnokfogtryliyhcoi.supabase.co';
+        const response = await fetch(`${supabaseUrl}/rest/v1/sources?select=count&limit=0`, {
+            headers: {
+                'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdtY2Rub2tmb2d0cnlsaXloY29pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzU2MzU3MzksImV4cCI6MjA1MTIxMTczOX0.7xqKaKE7wEqJG2FgP_k4v7KGgBYNT7EvQVg6AXKZkHE'
             }
+        });
+        
+        if (response.ok) {
+            console.log('✅ Supabase connection successful');
+            console.log(`   Database: Accessible`);
+            results.passed++;
         } else {
-            console.log('❌ Supabase credentials missing');
-            console.log('   Missing: SUPABASE_URL or SUPABASE_ANON_KEY');
+            console.log('❌ Supabase connection failed');
+            console.log(`   Status: ${response.status}`);
             results.failed++;
         }
     } catch (error) {
