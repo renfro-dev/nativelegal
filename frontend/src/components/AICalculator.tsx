@@ -346,7 +346,7 @@ export default function AIReadinessCalculator() {
       <Container className="py-16">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <Calculator className="w-16 h-16 text-blue-600 mx-auto mb-6" />
+            <Calculator className="w-16 h-16 text-emerald-500 mx-auto mb-6" />
             <h1 className="text-4xl font-bold text-gray-900 mb-4">
               Your AI Readiness Assessment Results
             </h1>
@@ -357,7 +357,7 @@ export default function AIReadinessCalculator() {
 
           <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
             <div className="text-center mb-8">
-              <div className="text-6xl font-bold text-blue-600 mb-2">
+              <div className="text-6xl font-bold text-emerald-500 mb-2">
                 {results.overall.toFixed(1)}
               </div>
               <div className="text-2xl font-semibold text-gray-900 mb-4">
@@ -583,7 +583,7 @@ export default function AIReadinessCalculator() {
     <Container className="py-16">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <Calculator className="w-16 h-16 text-blue-600 mx-auto mb-6" />
+          <Calculator className="w-16 h-16 text-emerald-500 mx-auto mb-6" />
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             AI Readiness Assessment Calculator
           </h1>
@@ -602,7 +602,7 @@ export default function AIReadinessCalculator() {
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
               <div
-                className="bg-blue-600 h-2 rounded-full transition-all duration-300 ease-in-out"
+                className="bg-emerald-500 h-2 rounded-full transition-all duration-300 ease-in-out"
                 style={{ width: `${((currentStep + 1) / assessmentSteps.length) * 100}%` }}
               />
             </div>
@@ -611,7 +611,7 @@ export default function AIReadinessCalculator() {
 
         <div className="bg-white rounded-lg shadow-lg p-8">
           <div className="flex items-center mb-8">
-            <div className="text-blue-600 mr-4">
+            <div className="text-emerald-500 mr-4">
               {currentStepData.icon}
             </div>
             <div>
@@ -631,9 +631,9 @@ export default function AIReadinessCalculator() {
                   {qIndex + 1}. {question.text}
                 </h3>
                 {question.helpText && (
-                  <div className="flex items-start mb-4 p-3 bg-blue-50 rounded-lg">
-                    <HelpCircle className="w-4 h-4 text-blue-600 mt-0.5 mr-2 flex-shrink-0" />
-                    <p className="text-sm text-blue-800">{question.helpText}</p>
+                  <div className="flex items-start mb-4 p-3 bg-emerald-50 rounded-lg">
+                    <HelpCircle className="w-4 h-4 text-emerald-500 mt-0.5 mr-2 flex-shrink-0" />
+                    <p className="text-sm text-emerald-800">{question.helpText}</p>
                   </div>
                 )}
                 <div className="space-y-3">
@@ -642,7 +642,7 @@ export default function AIReadinessCalculator() {
                       key={option.value}
                       className={`flex items-start p-4 rounded-lg border-2 cursor-pointer transition-colors ${
                         answers[question.id] === option.value
-                          ? 'border-blue-500 bg-blue-50'
+                          ? 'border-emerald-500 bg-emerald-50'
                           : 'border-gray-200 hover:border-gray-300'
                       }`}
                     >
@@ -656,7 +656,7 @@ export default function AIReadinessCalculator() {
                       />
                       <div className="flex items-center mr-3">
                         {answers[question.id] === option.value ? (
-                          <div className="w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center">
+                          <div className="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center">
                             <Check className="w-3 h-3 text-white" />
                           </div>
                         ) : (
@@ -691,7 +691,7 @@ export default function AIReadinessCalculator() {
             <button
               onClick={nextStep}
               disabled={!isStepComplete}
-              className="flex items-center px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center px-6 py-2 bg-emerald-500 text-white rounded-md hover:bg-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {currentStep === assessmentSteps.length - 1 ? 'Get Results' : 'Next'}
               <ArrowRight className="w-4 h-4 ml-2" />

@@ -1,29 +1,25 @@
 import { getAllPosts } from '@/lib/posts'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Calendar, Clock, User, Tag } from 'lucide-react'
 
 export default function BlogPage() {
   const posts = getAllPosts()
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-gray-900">
       {/* Navigation */}
-      <nav className="border-b border-slate-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+      <nav className="border-b border-gray-800 bg-gray-900/95 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center space-x-2">
-              <span className="text-xl font-bold text-slate-900">Native Legal</span>
+              <span className="text-xl font-bold text-white">Native Legal</span>
             </Link>
             <div className="hidden md:flex items-center space-x-8">
-              <Link href="/" className="text-slate-700 hover:text-blue-600 transition-colors">
+              <Link href="/" className="text-gray-300 hover:text-emerald-400 transition-colors">
                 Home
               </Link>
-              <Link href="/blog" className="text-blue-600 font-semibold">
-                Blog
-              </Link>
-              <Link href="/calculator" className="text-slate-700 hover:text-blue-600 transition-colors">
-                AI Calculator
+              <Link href="/blog" className="text-emerald-400 font-semibold">
+                Implementation Guides
               </Link>
             </div>
           </div>
@@ -31,53 +27,41 @@ export default function BlogPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+      <section className="py-16 bg-gradient-to-br from-gray-900 via-gray-800 to-emerald-900 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl lg:text-5xl font-bold mb-6">
             Legal AI Insights & Implementation Guides
           </h1>
-          <p className="text-xl text-blue-100 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">
             Practical strategies, frameworks, and insights for successfully implementing AI in your legal practice.
           </p>
         </div>
       </section>
 
       {/* Blog Posts Grid */}
-      <section className="py-16">
+      <section className="py-16 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {posts.map((post) => (
-              <article key={post.slug} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                {post.featuredImage && (
-                  <div className="aspect-video">
-                    <Image
-                      src={post.featuredImage}
-                      alt={post.title}
-                      width={400}
-                      height={300}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                )}
-
+              <article key={post.slug} className="bg-gray-700 rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow border border-gray-600">
                 <div className="p-6">
                   <div className="flex items-center gap-2 mb-4">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-emerald-500/20 text-emerald-300">
                       {post.category}
                     </span>
                   </div>
 
-                  <h2 className="text-xl font-bold text-slate-900 mb-3 line-clamp-2">
-                    <Link href={`/blog/${post.slug}`} className="hover:text-blue-600 transition-colors">
+                  <h2 className="text-xl font-bold text-white mb-3 line-clamp-2">
+                    <Link href={`/blog/${post.slug}`} className="hover:text-emerald-400 transition-colors">
                       {post.title}
                     </Link>
                   </h2>
 
-                  <p className="text-slate-600 mb-4 line-clamp-3">
+                  <p className="text-gray-300 mb-4 line-clamp-3">
                     {post.description}
                   </p>
 
-                  <div className="flex items-center text-sm text-slate-500 mb-4 space-x-4">
+                  <div className="flex items-center text-sm text-gray-400 mb-4 space-x-4">
                     <div className="flex items-center">
                       <Calendar className="w-4 h-4 mr-1" />
                       {new Date(post.date).toLocaleDateString('en-US', {
@@ -93,14 +77,14 @@ export default function BlogPage() {
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center text-sm text-slate-500">
+                    <div className="flex items-center text-sm text-gray-400">
                       <User className="w-4 h-4 mr-1" />
                       {post.author}
                     </div>
 
                     <Link
                       href={`/blog/${post.slug}`}
-                      className="inline-flex items-center text-blue-600 hover:text-blue-700 font-semibold text-sm"
+                      className="inline-flex items-center text-emerald-400 hover:text-emerald-300 font-semibold text-sm"
                     >
                       Read More →
                     </Link>
@@ -110,7 +94,7 @@ export default function BlogPage() {
                     {post.tags.slice(0, 3).map((tag) => (
                       <span
                         key={tag}
-                        className="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-slate-100 text-slate-600"
+                        className="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-gray-600 text-gray-300"
                       >
                         <Tag className="w-3 h-3 mr-1" />
                         {tag}

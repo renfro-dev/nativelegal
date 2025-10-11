@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation'
 import { getPostBySlug, getAllPosts } from '@/lib/posts'
 import { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, Calendar, Clock, Tag, User } from 'lucide-react'
 import fs from 'fs'
@@ -85,13 +84,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   if (!content) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-slate-900 mb-4">Content Not Found</h1>
-          <p className="text-slate-600 mb-8">The content for this blog post could not be loaded.</p>
+          <h1 className="text-2xl font-bold text-white mb-4">Content Not Found</h1>
+          <p className="text-gray-300 mb-8">The content for this blog post could not be loaded.</p>
           <Link
             href="/blog"
-            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center px-6 py-3 bg-emerald-500 text-white font-semibold rounded-lg hover:bg-emerald-600 transition-colors"
           >
             <ArrowLeft className="mr-2 w-4 h-4" />
             Back to Blog
@@ -105,23 +104,20 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { content: mdxContent } = matter(content)
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-gray-900">
       {/* Navigation */}
-      <nav className="border-b border-slate-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+      <nav className="border-b border-gray-800 bg-gray-900/95 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center space-x-2">
-              <span className="text-xl font-bold text-slate-900">Native Legal</span>
+              <span className="text-xl font-bold text-white">Native Legal</span>
             </Link>
             <div className="hidden md:flex items-center space-x-8">
-              <Link href="/" className="text-slate-700 hover:text-blue-600 transition-colors">
+              <Link href="/" className="text-gray-300 hover:text-emerald-400 transition-colors">
                 Home
               </Link>
-              <Link href="/blog" className="text-slate-700 hover:text-blue-600 transition-colors">
-                Blog
-              </Link>
-              <Link href="/calculator" className="text-slate-700 hover:text-blue-600 transition-colors">
-                AI Calculator
+              <Link href="/blog" className="text-gray-300 hover:text-emerald-400 transition-colors">
+                Implementation Guides
               </Link>
             </div>
           </div>
@@ -129,21 +125,21 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       </nav>
 
       {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+      <section className="py-16 bg-gradient-to-br from-gray-900 via-gray-800 to-emerald-900 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Link
             href="/blog"
-            className="inline-flex items-center text-blue-100 hover:text-white transition-colors mb-6"
+            className="inline-flex items-center text-gray-300 hover:text-white transition-colors mb-6"
           >
             <ArrowLeft className="mr-2 w-4 h-4" />
             Back to Blog
           </Link>
 
           <div className="flex flex-wrap items-center gap-4 mb-6">
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-500/20 text-blue-100">
+            <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-emerald-500/20 text-emerald-300">
               {post.category}
             </span>
-            <div className="flex items-center text-sm text-blue-100">
+            <div className="flex items-center text-sm text-gray-300">
               <Calendar className="w-4 h-4 mr-1" />
               {new Date(post.date).toLocaleDateString('en-US', {
                 year: 'numeric',
@@ -151,11 +147,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 day: 'numeric'
               })}
             </div>
-            <div className="flex items-center text-sm text-blue-100">
+            <div className="flex items-center text-sm text-gray-300">
               <Clock className="w-4 h-4 mr-1" />
               {post.readTime}
             </div>
-            <div className="flex items-center text-sm text-blue-100">
+            <div className="flex items-center text-sm text-gray-300">
               <User className="w-4 h-4 mr-1" />
               {post.author}
             </div>
@@ -165,7 +161,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {post.title}
           </h1>
 
-          <p className="text-xl text-blue-100 leading-relaxed">
+          <p className="text-xl text-gray-300 leading-relaxed">
             {post.description}
           </p>
 
@@ -173,7 +169,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-500/20 text-blue-100"
+                className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-emerald-500/20 text-emerald-300"
               >
                 <Tag className="w-3 h-3 mr-1" />
                 {tag}
@@ -183,102 +179,140 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </div>
       </section>
 
-      {/* Hero Image */}
-      {post.heroImage && (
-        <section className="py-8">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="aspect-video rounded-xl overflow-hidden shadow-2xl">
-              <Image
-                src={post.heroImage}
-                alt={`${post.title} - Professional legal AI guide`}
-                width={1200}
-                height={675}
-                className="w-full h-full object-cover"
-                priority
-              />
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Main Content */}
-      <section className="py-12">
+      <section className="py-12 bg-gray-800">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Table of Contents */}
           <TableOfContents content={mdxContent} />
 
-          {/* Article Content - Simplified rendering for compatibility */}
-          <article className="prose prose-slate prose-lg max-w-none">
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
-              <h2 className="text-xl font-semibold text-blue-900 mb-2">📚 Comprehensive Legal AI Guide</h2>
-              <p className="text-blue-800">
-                This detailed guide covers everything you need to know about AI implementation in legal practice.
-                The content includes practical frameworks, checklists, and proven strategies used by leading law firms.
+          {/* Article Content */}
+          <article className="prose prose-invert prose-lg max-w-none">
+            <div className="bg-gray-700 border border-gray-600 rounded-lg p-6 mb-8">
+              <h2 className="text-xl font-semibold text-emerald-400 mb-2">📚 {post.title}</h2>
+              <p className="text-gray-300">
+                {post.description}
               </p>
             </div>
 
-            <div className="space-y-8">
-              <div>
-                <h2 className="text-2xl font-bold text-slate-900 mb-4">What You&apos;ll Learn</h2>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-3">
-                    <h3 className="text-lg font-semibold text-slate-800">🎯 Assessment Frameworks</h3>
-                    <ul className="text-slate-600 space-y-1">
-                      <li>• Infrastructure readiness evaluation</li>
-                      <li>• Data quality and organization assessment</li>
-                      <li>• Staff and organizational readiness</li>
-                      <li>• Financial planning and ROI measurement</li>
-                    </ul>
-                  </div>
-                  <div className="space-y-3">
-                    <h3 className="text-lg font-semibold text-slate-800">⚡ Implementation Strategies</h3>
-                    <ul className="text-slate-600 space-y-1">
-                      <li>• Technology selection and vendor evaluation</li>
-                      <li>• Change management best practices</li>
-                      <li>• Compliance and risk management</li>
-                      <li>• Performance monitoring and optimization</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+            {/* Render the actual MDX content */}
+            <div className="prose prose-invert max-w-none">
+              {mdxContent
+                .split('\n')
+                .filter(line => line.trim()) // Remove empty lines
+                .filter(line => {
+                  const text = line.trim().toLowerCase();
+                  // Filter out duplicate TOC entries and list-like TOC content
+                  return !text.includes('table of contents') &&
+                         !text.includes('## table of contents') &&
+                         !text.includes('### table of contents') &&
+                         !text.includes('contents') &&
+                         !text.match(/^-\s*\[.*\]\(#.*\)/) && // Remove markdown TOC links like "- [Section](#section)"
+                         !text.match(/^\d+\.\s*\[.*\]\(#.*\)/) && // Remove numbered TOC links
+                         !text.match(/^-\s*[a-z\s]+:\s*[a-z\s]+$/i) && // Remove plain TOC entries like "- Section: Description"
+                         !(text.startsWith('-') && text.includes(':') && text.length < 100); // Remove short colon-separated list items
+                })
+                .map((line, index) => {
+                  const trimmed = line.trim();
 
-              <div className="bg-gradient-to-r from-slate-50 to-blue-50 rounded-lg p-6">
-                <h2 className="text-2xl font-bold text-slate-900 mb-4">🚀 Start Your AI Journey</h2>
-                <p className="text-slate-700 mb-4">
-                  Ready to assess your firm&apos;s AI readiness? Our comprehensive calculator provides a detailed evaluation
-                  of your current state and personalized recommendations for implementation.
-                </p>
-                <Link
-                  href="/calculator"
-                  className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  Take the AI Readiness Assessment →
-                </Link>
-              </div>
+                  // Clean up symbols first
+                  const cleanLine = trimmed
+                    .replace(/\{[^}]*\}/g, '') // Remove {anything}
+                    .replace(/^\s*\*+\s*/, '') // Remove leading asterisks
+                    .trim();
+
+                  // Skip if empty after cleaning
+                  if (!cleanLine) return null;
+
+                  // Main Headers (##)
+                  if (trimmed.startsWith('## ')) {
+                    const headerText = cleanLine.replace(/^#+\s*/, '');
+                    const headerId = headerText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                    return (
+                      <h2 key={index} id={headerId} className="text-3xl font-bold text-white mb-6 mt-12 first:mt-8">
+                        {headerText}
+                      </h2>
+                    );
+                  }
+
+                  // Sub Headers (###)
+                  if (trimmed.startsWith('### ')) {
+                    const headerText = cleanLine.replace(/^#+\s*/, '');
+                    const headerId = headerText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                    return (
+                      <h3 key={index} id={headerId} className="text-xl font-semibold text-emerald-400 mb-4 mt-8">
+                        {headerText}
+                      </h3>
+                    );
+                  }
+
+                  // Minor Headers (####)
+                  if (trimmed.startsWith('#### ')) {
+                    const headerText = cleanLine.replace(/^#+\s*/, '');
+                    const headerId = headerText.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                    return (
+                      <h4 key={index} id={headerId} className="text-lg font-medium text-emerald-300 mb-3 mt-6">
+                        {headerText}
+                      </h4>
+                    );
+                  }
+
+                  // List items
+                  if (trimmed.startsWith('- ') || trimmed.match(/^\d+\.\s/)) {
+                    const listText = cleanLine.replace(/^[-\d.]\s*/, '');
+                    // Handle bold and italic within list items
+                    const formattedText = listText
+                      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-emerald-300">$1</strong>')
+                      .replace(/\*(.*?)\*/g, '<em class="italic text-gray-400">$1</em>');
+
+                    return (
+                      <li key={index} className="text-gray-300 mb-3 list-disc list-inside">
+                        <span dangerouslySetInnerHTML={{ __html: formattedText }} />
+                      </li>
+                    );
+                  }
+
+                  // Regular paragraphs
+                  if (cleanLine.length > 0) {
+                    // Handle bold and italic formatting
+                    const formattedText = cleanLine
+                      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-emerald-300">$1</strong>')
+                      .replace(/\*(.*?)\*/g, '<em class="italic text-gray-400">$1</em>');
+
+                    return (
+                      <p key={index} className="text-gray-300 mb-6 leading-relaxed text-base">
+                        <span dangerouslySetInnerHTML={{ __html: formattedText }} />
+                      </p>
+                    );
+                  }
+
+                  return null;
+                })
+                .filter(Boolean)}
             </div>
           </article>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-slate-800 to-slate-900 text-white">
+      <section className="py-16 bg-gradient-to-r from-gray-800 to-gray-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">
             Ready to Transform Your Law Firm?
           </h2>
-          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
             Get a personalized AI implementation roadmap for your practice. Our team will help you modernize your operations and boost revenue.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/calculator"
-              className="inline-flex items-center px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors group"
+              className="inline-flex items-center px-8 py-3 bg-emerald-500 text-white font-semibold rounded-lg hover:bg-emerald-600 transition-colors group"
             >
               Take AI Readiness Assessment
             </Link>
             <Link
               href="/consultation"
-              className="inline-flex items-center px-8 py-3 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-slate-900 transition-colors"
+              className="inline-flex items-center px-8 py-3 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-gray-900 transition-colors"
             >
               Book a Consultation
             </Link>
