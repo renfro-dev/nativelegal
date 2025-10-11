@@ -13,10 +13,10 @@ The AI Readiness Calculator is a multi-step assessment tool designed to evaluate
 - Establish thought leadership in legal AI transformation
 
 ### Target Audience
-- Family law firms (primary)
-- Mid-size law firms (secondary)
+- Small to mid-size law firms across all practice areas (primary)
 - Law firm decision-makers (partners, managing partners, IT directors)
 - Firms considering AI implementation or modernization
+- Practice areas: Family law, personal injury, estate planning, criminal defense, business law, and more
 
 ## User Journey & Flow
 
