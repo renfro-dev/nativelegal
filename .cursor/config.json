@@ -28,6 +28,7 @@
     "context/docs/PRD.md",
     "context/docs/Blueprint.md", 
     "context/docs/Tasks.md",
+    "social-media-todo.md",
     "context/agents/supervisor.md",
     "context/agents/agent-workflow-reference.md",
     "context/orchestration/state.json",
