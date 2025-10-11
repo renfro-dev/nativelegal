@@ -1,0 +1,157 @@
+{
+  "name": "Blog Post to Twitter Thread",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "id": "manual-trigger-2"
+    },
+    {
+      "parameters": {
+        "filePath": "={{ $json.blogPostPath }}",
+        "options": {}
+      },
+      "name": "Read Blog Post",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [450, 300],
+      "id": "read-blog-2"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract frontmatter and content from MDX\nconst content = $input.first().binary.data.toString('utf-8');\n\nconst frontmatterMatch = content.match(/^---\\n([\\s\\S]*?)\\n---/);\nconst frontmatter = {};\n\nif (frontmatterMatch) {\n  const lines = frontmatterMatch[1].split('\\n');\n  lines.forEach(line => {\n    const [key, ...valueParts] = line.split(':');\n    if (key && valueParts.length > 0) {\n      frontmatter[key.trim()] = valueParts.join(':').trim().replace(/^\"|\"$/g, '');\n    }\n  });\n}\n\nconst mainContent = content.replace(/^---\\n[\\s\\S]*?\\n---/, '').trim();\n\nreturn {\n  title: frontmatter.title || 'Untitled',\n  description: frontmatter.description || '',\n  slug: frontmatter.slug || '',\n  fullContent: mainContent.substring(0, 5000)\n};"
+      },
+      "name": "Parse MDX Content",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [650, 300],
+      "id": "parse-mdx-2"
+    },
+    {
+      "parameters": {
+        "model": "gpt-4-turbo-preview",
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are a Twitter/X content strategist. Create engaging tweet threads that educate and convert. Each tweet must be under 280 characters."
+            },
+            {
+              "role": "user",
+              "content": "Create a Twitter thread (10 tweets) from this blog post:\\n\\nTitle: {{ $json.title }}\\nContent: {{ $json.fullContent }}\\n\\nRequirements:\\n- Tweet 1: Hook with surprising statistic\\n- Tweets 2-8: Key insights (one per tweet)\\n- Tweet 9: Summary/synthesis\\n- Tweet 10: CTA with link: https://nativelegal.com/blog/{{ $json.slug }}\\n- Each tweet under 280 characters\\n- Include relevant hashtags in appropriate tweets\\n- Number tweets (1/10, 2/10, etc.)\\n- Professional but engaging tone\\n\\nReturn as JSON array: [{\\\"number\\\": 1, \\\"text\\\": \\\"...\\\"}]"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "name": "Generate Twitter Thread",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1,
+      "position": [850, 300],
+      "id": "openai-twitter-1",
+      "credentials": {
+        "openAiApi": {
+          "id": "openai-credentials",
+          "name": "OpenAI API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json.message.content;\nconst tweets = JSON.parse(response);\nreturn tweets;"
+      },
+      "name": "Parse Thread JSON",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1050, 300],
+      "id": "parse-thread-1"
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.text }}",
+        "additionalFields": {
+          "inReplyToStatusId": "={{ $node[\"Post First Tweet\"].json.id }}"
+        }
+      },
+      "name": "Post Thread Tweets",
+      "type": "n8n-nodes-base.twitter",
+      "typeVersion": 2,
+      "position": [1450, 300],
+      "id": "twitter-thread-1",
+      "credentials": {
+        "twitterOAuth2Api": {
+          "id": "twitter-credentials",
+          "name": "Twitter OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "text": "={{ $first().text }}",
+        "additionalFields": {}
+      },
+      "name": "Post First Tweet",
+      "type": "n8n-nodes-base.twitter",
+      "typeVersion": 2,
+      "position": [1250, 300],
+      "id": "twitter-first-1",
+      "credentials": {
+        "twitterOAuth2Api": {
+          "id": "twitter-credentials",
+          "name": "Twitter OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "table": "content_queue",
+        "columns": "blog_post_slug, content_type, content_text, platform, status",
+        "values": "={{ $json.slug }},twitter_thread,={{ JSON.stringify($json.tweets) }},twitter,posted"
+      },
+      "name": "Log to Database",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1650, 300],
+      "id": "supabase-log-2",
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-credentials",
+          "name": "Supabase API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [[{"node": "Read Blog Post", "type": "main", "index": 0}]]
+    },
+    "Read Blog Post": {
+      "main": [[{"node": "Parse MDX Content", "type": "main", "index": 0}]]
+    },
+    "Parse MDX Content": {
+      "main": [[{"node": "Generate Twitter Thread", "type": "main", "index": 0}]]
+    },
+    "Generate Twitter Thread": {
+      "main": [[{"node": "Parse Thread JSON", "type": "main", "index": 0}]]
+    },
+    "Parse Thread JSON": {
+      "main": [[{"node": "Post First Tweet", "type": "main", "index": 0}]]
+    },
+    "Post First Tweet": {
+      "main": [[{"node": "Post Thread Tweets", "type": "main", "index": 0}]]
+    },
+    "Post Thread Tweets": {
+      "main": [[{"node": "Log to Database", "type": "main", "index": 0}]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
+

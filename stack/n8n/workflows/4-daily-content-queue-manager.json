@@ -1,0 +1,241 @@
+{
+  "name": "Daily Content Queue Manager",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9
+            },
+            {
+              "triggerAtHour": 14
+            },
+            {
+              "triggerAtHour": 17
+            }
+          ]
+        }
+      },
+      "name": "Schedule (9am, 2pm, 5pm)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1,
+      "position": [250, 400],
+      "id": "schedule-trigger-1"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM get_next_queued_post('linkedin')",
+        "options": {}
+      },
+      "name": "Get Next LinkedIn Post",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [450, 300],
+      "id": "get-linkedin-1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-credentials",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM get_next_queued_post('twitter')",
+        "options": {}
+      },
+      "name": "Get Next Twitter Post",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [450, 500],
+      "id": "get-twitter-1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-credentials",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.content_type }}",
+              "value2": "twitter_thread"
+            }
+          ]
+        }
+      },
+      "name": "Is Thread?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [650, 500],
+      "id": "is-thread-1"
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.content_text }}",
+        "additionalFields": {}
+      },
+      "name": "Post to LinkedIn",
+      "type": "n8n-nodes-base.linkedIn",
+      "typeVersion": 1,
+      "position": [850, 300],
+      "id": "linkedin-post-4",
+      "credentials": {
+        "linkedInOAuth2Api": {
+          "id": "linkedin-credentials",
+          "name": "LinkedIn OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.content_text }}",
+        "additionalFields": {}
+      },
+      "name": "Post Single Tweet",
+      "type": "n8n-nodes-base.twitter",
+      "typeVersion": 2,
+      "position": [850, 450],
+      "id": "twitter-single-1",
+      "credentials": {
+        "twitterOAuth2Api": {
+          "id": "twitter-credentials",
+          "name": "Twitter OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const tweets = JSON.parse($json.content_text);\\nreturn tweets;"
+      },
+      "name": "Parse Thread",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [850, 550],
+      "id": "parse-thread-4"
+    },
+    {
+      "parameters": {
+        "text": "={{ $json.text }}",
+        "additionalFields": {}
+      },
+      "name": "Post Thread",
+      "type": "n8n-nodes-base.twitter",
+      "typeVersion": 2,
+      "position": [1050, 550],
+      "id": "twitter-thread-4",
+      "credentials": {
+        "twitterOAuth2Api": {
+          "id": "twitter-credentials",
+          "name": "Twitter OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "table": "content_queue",
+        "updateKey": "id",
+        "columnsUi": {
+          "column": [
+            {
+              "name": "status",
+              "value": "posted"
+            },
+            {
+              "name": "posted_at",
+              "value": "={{ $now.toISO() }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Mark as Posted (LinkedIn)",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1050, 300],
+      "id": "mark-posted-linkedin-1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-credentials",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "table": "content_queue",
+        "updateKey": "id",
+        "columnsUi": {
+          "column": [
+            {
+              "name": "status",
+              "value": "posted"
+            },
+            {
+              "name": "posted_at",
+              "value": "={{ $now.toISO() }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Mark as Posted (Twitter)",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1250, 500],
+      "id": "mark-posted-twitter-1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-credentials",
+          "name": "Supabase API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule (9am, 2pm, 5pm)": {
+      "main": [
+        [
+          {"node": "Get Next LinkedIn Post", "type": "main", "index": 0},
+          {"node": "Get Next Twitter Post", "type": "main", "index": 0}
+        ]
+      ]
+    },
+    "Get Next LinkedIn Post": {
+      "main": [[{"node": "Post to LinkedIn", "type": "main", "index": 0}]]
+    },
+    "Get Next Twitter Post": {
+      "main": [[{"node": "Is Thread?", "type": "main", "index": 0}]]
+    },
+    "Is Thread?": {
+      "main": [
+        [{"node": "Parse Thread", "type": "main", "index": 0}],
+        [{"node": "Post Single Tweet", "type": "main", "index": 0}]
+      ]
+    },
+    "Post to LinkedIn": {
+      "main": [[{"node": "Mark as Posted (LinkedIn)", "type": "main", "index": 0}]]
+    },
+    "Post Single Tweet": {
+      "main": [[{"node": "Mark as Posted (Twitter)", "type": "main", "index": 0}]]
+    },
+    "Parse Thread": {
+      "main": [[{"node": "Post Thread", "type": "main", "index": 0}]]
+    },
+    "Post Thread": {
+      "main": [[{"node": "Mark as Posted (Twitter)", "type": "main", "index": 0}]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
+

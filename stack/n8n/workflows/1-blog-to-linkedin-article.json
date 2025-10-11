@@ -1,0 +1,134 @@
+{
+  "name": "Blog Post to LinkedIn Article",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "id": "manual-trigger-1"
+    },
+    {
+      "parameters": {
+        "filePath": "={{ $json.blogPostPath }}",
+        "options": {}
+      },
+      "name": "Read Blog Post",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [450, 300],
+      "id": "read-blog-1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extract frontmatter and content from MDX\nconst content = $input.first().binary.data.toString('utf-8');\n\n// Extract frontmatter\nconst frontmatterMatch = content.match(/^---\\n([\\s\\S]*?)\\n---/);\nconst frontmatter = {};\n\nif (frontmatterMatch) {\n  const lines = frontmatterMatch[1].split('\\n');\n  lines.forEach(line => {\n    const [key, ...valueParts] = line.split(':');\n    if (key && valueParts.length > 0) {\n      frontmatter[key.trim()] = valueParts.join(':').trim().replace(/^\"|\"$/g, '');\n    }\n  });\n}\n\n// Remove frontmatter and extract content\nconst mainContent = content.replace(/^---\\n[\\s\\S]*?\\n---/, '').trim();\n\n// Extract first 3 sections for LinkedIn summary\nconst sections = mainContent.split('##').filter(s => s.trim()).slice(0, 3);\nconst summary = sections.map(s => {\n  const lines = s.split('\\n').filter(l => l.trim());\n  return lines.slice(0, 3).join(' ');\n}).join('\\n\\n');\n\nreturn {\n  title: frontmatter.title || 'Untitled',\n  description: frontmatter.description || '',\n  slug: frontmatter.slug || '',\n  tags: frontmatter.tags || '',\n  fullContent: mainContent,\n  summary: summary.substring(0, 1300) // LinkedIn limit\n};"
+      },
+      "name": "Parse MDX Content",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [650, 300],
+      "id": "parse-mdx-1"
+    },
+    {
+      "parameters": {
+        "resource": "post",
+        "text": "={{ $json.linkedInText }}",
+        "additionalFields": {}
+      },
+      "name": "Post to LinkedIn",
+      "type": "n8n-nodes-base.linkedIn",
+      "typeVersion": 1,
+      "position": [1050, 300],
+      "id": "linkedin-post-1",
+      "credentials": {
+        "linkedInOAuth2Api": {
+          "id": "linkedin-credentials",
+          "name": "LinkedIn OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "gpt-4-turbo-preview",
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are a LinkedIn content strategist for law firms. Create engaging, professional LinkedIn posts that convert readers into leads."
+            },
+            {
+              "role": "user",
+              "content": "Create a LinkedIn post for this blog article:\\n\\nTitle: {{ $json.title }}\\nDescription: {{ $json.description }}\\nSummary: {{ $json.summary }}\\n\\nRequirements:\\n- Hook in first line\\n- 3-5 key insights as bullets\\n- Professional but conversational tone\\n- Include relevant hashtags: #LegalTech #LawFirm #PracticeManagement\\n- End with CTA to read full article\\n- Max 1300 characters\\n- Include link: https://nativelegal.com/blog/{{ $json.slug }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Generate LinkedIn Content",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1,
+      "position": [850, 300],
+      "id": "openai-linkedin-1",
+      "credentials": {
+        "openAiApi": {
+          "id": "openai-credentials",
+          "name": "OpenAI API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return {\n  linkedInText: $input.first().json.message.content\n};"
+      },
+      "name": "Format Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [950, 300],
+      "id": "format-response-1"
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "table": "content_queue",
+        "columns": "blog_post_slug, content_type, content_text, platform, status",
+        "values": "={{ $json.slug }},linkedin_article,={{ $json.linkedInText }},linkedin,posted"
+      },
+      "name": "Log to Database",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1250, 300],
+      "id": "supabase-log-1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-credentials",
+          "name": "Supabase API"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [[{"node": "Read Blog Post", "type": "main", "index": 0}]]
+    },
+    "Read Blog Post": {
+      "main": [[{"node": "Parse MDX Content", "type": "main", "index": 0}]]
+    },
+    "Parse MDX Content": {
+      "main": [[{"node": "Generate LinkedIn Content", "type": "main", "index": 0}]]
+    },
+    "Generate LinkedIn Content": {
+      "main": [[{"node": "Format Response", "type": "main", "index": 0}]]
+    },
+    "Format Response": {
+      "main": [[{"node": "Post to LinkedIn", "type": "main", "index": 0}]]
+    },
+    "Post to LinkedIn": {
+      "main": [[{"node": "Log to Database", "type": "main", "index": 0}]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
+

@@ -1,0 +1,130 @@
+{
+  "name": "Content Repurposing Pipeline",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [250, 400],
+      "id": "manual-trigger-3"
+    },
+    {
+      "parameters": {
+        "filePath": "={{ $json.blogPostPath }}",
+        "options": {}
+      },
+      "name": "Read Blog Post",
+      "type": "n8n-nodes-base.readBinaryFile",
+      "typeVersion": 1,
+      "position": [450, 400],
+      "id": "read-blog-3"
+    },
+    {
+      "parameters": {
+        "jsCode": "const content = $input.first().binary.data.toString('utf-8');\nconst frontmatterMatch = content.match(/^---\\n([\\s\\S]*?)\\n---/);\nconst frontmatter = {};\n\nif (frontmatterMatch) {\n  const lines = frontmatterMatch[1].split('\\n');\n  lines.forEach(line => {\n    const [key, ...valueParts] = line.split(':');\n    if (key && valueParts.length > 0) {\n      frontmatter[key.trim()] = valueParts.join(':').trim().replace(/^\"|\"$/g, '');\n    }\n  });\n}\n\nconst mainContent = content.replace(/^---\\n[\\s\\S]*?\\n---/, '').trim();\n\nreturn {\n  title: frontmatter.title || 'Untitled',\n  description: frontmatter.description || '',\n  slug: frontmatter.slug || '',\n  tags: frontmatter.tags || '',\n  fullContent: mainContent\n};"
+      },
+      "name": "Parse MDX Content",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [650, 400],
+      "id": "parse-mdx-3"
+    },
+    {
+      "parameters": {
+        "model": "gpt-4-turbo-preview",
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are a social media content strategist. Generate multiple content formats from one blog post."
+            },
+            {
+              "role": "user",
+              "content": "From this blog post, generate:\\n\\nTitle: {{ $json.title }}\\nContent: {{ $json.fullContent }}\\n\\nCreate:\\n1. LinkedIn Article (1200 chars)\\n2. 3 LinkedIn Short Posts (300 chars each)\\n3. Twitter Thread (10 tweets)\\n4. 10 Quote Cards (one-sentence insights)\\n5. Carousel Outline (10 slides with titles)\\n\\nReturn as JSON:\\n{\\n  \\\"linkedinArticle\\\": \\\"...\\\",\\n  \\\"linkedinPosts\\\": [\\\"...\\\", \\\"...\\\", \\\"...\\\"],\\n  \\\"twitterThread\\\": [{\\\"number\\\": 1, \\\"text\\\": \\\"...\\\"}],\\n  \\\"quoteCards\\\": [\\\"...\\\"],\\n  \\\"carouselOutline\\\": [{\\\"slide\\\": 1, \\\"title\\\": \\\"...\\\", \\\"content\\\": \\\"...\\\"}]\\n}\\n\\nInclude link: https://nativelegal.com/blog/{{ $json.slug }}"
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.7,
+          "maxTokens": 4000
+        }
+      },
+      "name": "Generate All Content",
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1,
+      "position": [850, 400],
+      "id": "openai-repurpose-1",
+      "credentials": {
+        "openAiApi": {
+          "id": "openai-credentials",
+          "name": "OpenAI API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $input.first().json.message.content;\nconst allContent = JSON.parse(response);\nconst slug = $input.first().json.slug;\n\n// Create array of content items to queue\nconst contentQueue = [];\n\n// LinkedIn Article\ncontentQueue.push({\n  slug: slug,\n  type: 'linkedin_article',\n  text: allContent.linkedinArticle,\n  platform: 'linkedin',\n  scheduledDays: 0 // Post immediately\n});\n\n// LinkedIn Posts (schedule over 2 weeks)\nallContent.linkedinPosts.forEach((post, i) => {\n  contentQueue.push({\n    slug: slug,\n    type: 'linkedin_post',\n    text: post,\n    platform: 'linkedin',\n    scheduledDays: (i + 1) * 5 // Every 5 days\n  });\n});\n\n// Twitter Thread\ncontentQueue.push({\n  slug: slug,\n  type: 'twitter_thread',\n  text: JSON.stringify(allContent.twitterThread),\n  platform: 'twitter',\n  scheduledDays: 1 // Next day\n});\n\n// Quote Cards (schedule throughout month)\nallContent.quoteCards.forEach((quote, i) => {\n  contentQueue.push({\n    slug: slug,\n    type: 'quote_card',\n    text: quote,\n    platform: 'linkedin',\n    scheduledDays: (i + 1) * 3 // Every 3 days\n  });\n});\n\n// Carousel\ncontentQueue.push({\n  slug: slug,\n  type: 'carousel',\n  text: JSON.stringify(allContent.carouselOutline),\n  platform: 'linkedin',\n  scheduledDays: 7 // 1 week later\n});\n\nreturn contentQueue;"
+      },
+      "name": "Format Content Queue",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1050, 400],
+      "id": "format-queue-1"
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "table": "content_queue",
+        "columns": "blog_post_slug, content_type, content_text, platform, status, scheduled_for",
+        "values": "={{ $json.slug }},={{ $json.type }},={{ $json.text }},={{ $json.platform }},pending,={{ $now.plus({days: $json.scheduledDays}).toISO() }}"
+      },
+      "name": "Add to Queue",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [1250, 400],
+      "id": "supabase-queue-1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "supabase-credentials",
+          "name": "Supabase API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "✅ Content Repurposing Complete!\\n\\nGenerated from: {{ $node[\"Parse MDX Content\"].json.title }}\\n\\nCreated:\\n- 1 LinkedIn Article\\n- 3 LinkedIn Short Posts\\n- 1 Twitter Thread (10 tweets)\\n- 10 Quote Cards\\n- 1 Carousel Outline\\n\\nAll content added to queue and scheduled over next 30 days.",
+        "options": {}
+      },
+      "name": "Summary Notification",
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [1450, 400],
+      "id": "notification-1"
+    }
+  ],
+  "connections": {
+    "Manual Trigger": {
+      "main": [[{"node": "Read Blog Post", "type": "main", "index": 0}]]
+    },
+    "Read Blog Post": {
+      "main": [[{"node": "Parse MDX Content", "type": "main", "index": 0}]]
+    },
+    "Parse MDX Content": {
+      "main": [[{"node": "Generate All Content", "type": "main", "index": 0}]]
+    },
+    "Generate All Content": {
+      "main": [[{"node": "Format Content Queue", "type": "main", "index": 0}]]
+    },
+    "Format Content Queue": {
+      "main": [[{"node": "Add to Queue", "type": "main", "index": 0}]]
+    },
+    "Add to Queue": {
+      "main": [[{"node": "Summary Notification", "type": "main", "index": 0}]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
+
