@@ -8,7 +8,7 @@
     "Update state.json after each agent action",
     "Require Reviewer approval before publishing/destructive ops",
     "Legal compliance: disclaimers, primary sources, redact PII",
-    "Target: Nationwide USA law firm buyers (AI readiness, RevOps, workflows)"
+    "Target: Nationwide USA law firm buyers (AI readiness, RevOps, workflows, automation, AI, collections, intake, marketing))"
   ],
   "includePattern": [
     "**/*.{md,json,sql,ts,tsx,js,jsx}",
