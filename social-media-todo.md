@@ -579,7 +579,91 @@ docker-compose restart
 
 ---
 
-**Last Updated:** October 11, 2025
+---
+
+## RSS Feed Monitoring System Setup 📡
+
+### [ ] Task 22: Set Up RSS Feed Aggregator for Platform Monitoring
+**Status:** Pending  
+**Time:** 2-3 hours  
+**Action:**
+Automated feed monitoring system to keep all platform comparison content current.
+
+**Phase 1: Database Setup**
+1. Create Supabase tables for feed monitoring:
+
+```sql
+-- Feed sources table
+CREATE TABLE IF NOT EXISTS legal_tech_feeds (
+  id BIGSERIAL PRIMARY KEY,
+  platform VARCHAR(255) NOT NULL,
+  feed_url TEXT NOT NULL,
+  category VARCHAR(100),
+  last_fetched TIMESTAMP,
+  update_frequency VARCHAR(20),
+  is_active BOOLEAN DEFAULT true,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Feed items table
+CREATE TABLE IF NOT EXISTS feed_items (
+  id BIGSERIAL PRIMARY KEY,
+  feed_id BIGINT REFERENCES legal_tech_feeds(id),
+  title TEXT NOT NULL,
+  link TEXT UNIQUE NOT NULL,
+  description TEXT,
+  pub_date TIMESTAMP,
+  content TEXT,
+  platform VARCHAR(255),
+  category VARCHAR(100),
+  processed BOOLEAN DEFAULT false,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Content change alerts table
+CREATE TABLE IF NOT EXISTS content_change_alerts (
+  id BIGSERIAL PRIMARY KEY,
+  platform VARCHAR(255) NOT NULL,
+  alert_type VARCHAR(100),
+  change_description TEXT,
+  affected_posts TEXT[],
+  severity VARCHAR(20),
+  action_required BOOLEAN DEFAULT false,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+```
+
+2. Seed initial feed sources (see `stack/feeds/legal-tech-rss-aggregator.md`)
+
+**Phase 2: Edge Function Development**
+1. Create Supabase Edge Function for RSS parsing
+2. Create Edge Function for change detection
+3. Create Edge Function for content audit
+4. Create Edge Function for review aggregation
+
+**Phase 3: Cron Job Configuration**
+1. Set up daily feed sync (every 7 days)
+2. Set up weekly review aggregation
+3. Configure content audit triggers
+4. Set up email alerts for high-severity changes
+
+**Phase 4: Dashboard & Monitoring**
+1. Build monitoring dashboard
+2. Create alert configuration UI
+3. Set up email notifications
+4. Test end-to-end workflow
+
+**Documentation:** `stack/feeds/legal-tech-rss-aggregator.md`
+
+**Expected Benefits:**
+- Automatic detection of platform updates
+- Content freshness assurance
+- Competitive intelligence
+- Reduced manual content audits
+
+---
+
+**Last Updated:** January 28, 2025
 **Status:** Ready to begin implementation
 **Next Action:** Task 1 - Install and start n8n
 
