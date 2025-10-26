@@ -8,7 +8,7 @@ This document analyzes the internal linking structure across all 17 blog posts t
 
 Hub posts serve as the central comparison guides that link to supporting content:
 
-### ai-contract-tools-law-firms-comparison-2024
+### ai-contract-tools-law-firms-comparison-2025
 
 **Internal Links:** 6 links
 
