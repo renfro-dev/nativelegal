@@ -1,0 +1,26 @@
+name: Daily Reddit Intelligence Collection
+
+on:
+  schedule:
+    - cron: '0 14 * * *'  # Daily at 9 AM EST / 2 PM UTC
+  workflow_dispatch:  # Allow manual trigger from GitHub Actions UI
+
+jobs:
+  collect-intelligence:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Reddit Intelligence Collection
+        run: |
+          curl -X POST \
+            'https://gmcdnokfogtryliyhcoi.supabase.co/functions/v1/smart-service' \
+            -H 'Content-Type: application/json' \
+            -H 'Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}' \
+            -d '{}'
+      
+      - name: Log Success
+        if: success()
+        run: echo "✅ Reddit intelligence collection triggered successfully"
+      
+      - name: Log Failure
+        if: failure()
+        run: echo "❌ Reddit intelligence collection failed"

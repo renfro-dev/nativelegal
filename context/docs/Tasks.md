@@ -1,87 +1,98 @@
 # Active Tasks & Roadmap - Native Legal Platform
 
-**Last Updated:** October 11, 2025  
-**Current Phase:** Sprint 5 - Social Media & Growth  
-**Archive:** Completed Sprints 0-4 → `context/docs/archive/sprints-0-4-completed.md`
+**Last Updated:** January 28, 2025  
+**Current Phase:** Sprint 6 - Analytics & Real-Time Monitoring  
+**Archive:** Completed Sprints 0-5 → `context/docs/archive/sprints-0-5-completed.md`
 
 ---
 
-## 🎯 Current Focus: Social Media Automation
+## 🎯 Current Focus: GA4 Real-Time Analytics Integration
 
-**Primary Goal:** Leverage existing 8 blog posts to generate 120+ social media posts with automated scheduling
+**Primary Goal:** Connect GA4 for real-time traffic tracking and performance monitoring
 
-**Status:** Setup phase  
-**Timeline:** 3-4 weeks to full automation  
-**Todo List:** `social-media-todo.md` (21 tasks)
+**Status:** In progress  
+**Timeline:** 1-2 weeks to full analytics dashboard  
+**Documentation:** `docs/setup/QUICK_GA4_SETUP.md`, `scripts/setup-ga4-connection.js`
 
 ### Quick Status
-- [x] n8n workflows created and documented
-- [x] Supabase schema designed
-- [x] Documentation completed
-- [ ] n8n installation and setup
-- [ ] API credentials configuration
-- [ ] Workflow testing
-- [ ] Content generation (8 blog posts → 120+ social posts)
+- [x] GA4 Property created (ID: 503108038)
+- [x] Service Account created and configured
+- [x] APIs enabled (Analytics Admin, Data API, Search Console)
+- [x] Analytics Edge Function deployed
+- [x] Service account added to GA4 property with Viewer access
+- [x] Google Tag Manager installed on native.legal
+- [ ] Test GA4 API connection with real traffic (⏳ waiting 48hrs for data)
+- [ ] Implement real-time analytics dashboard
+- [ ] Set up conversion tracking and lead attribution
 
-**Next Action:** Install n8n using `./stack/n8n/start-n8n.sh`
-
----
-
-## 📋 Sprint 5: Frontend Enhancement & AI Assessment Tool
-
-### AI Readiness Assessment Calculator
-**Status:** ON HOLD (pending social media automation completion)
-
-- [ ] Complete Supabase environment variable configuration
-- [ ] Fix API route Supabase client initialization
-- [ ] Test complete user flow from calculator to personalized guide generation
-- [ ] Deploy AI implementation guide generation system
-
-**Blockers:** None - deprioritized for social media automation
+**Next Action:** Re-test GA4 connection in 48 hours: `export GA4_PROPERTY_ID=503108038 && node scripts/setup-ga4-connection.js`
 
 ---
 
-### Frontend Improvements
+## ✅ Recently Completed
+
+### Frontend & Content (January 2025)
+- [x] **Production deployment** → native.legal (Replit)
+- [x] **22 optimized blog posts** with full SEO metadata
+- [x] **Internal linking strategy** (hub and spoke architecture)
+- [x] **Image optimization** (32 standardized SVG images)
+- [x] **Academic citations** added to all posts
+- [x] **FAQ sections** and "People Also Asked" content
+- [x] **Advanced schema markup** (Comparison, Review, FAQ)
+
+### Content Strategy (January 2025)
+- [x] **5 new spoke posts** (Harvey AI, Latch, Lexion, LegalSifter, vLex)
+- [x] **Document drafting tools hub** with 3-way comparison
+- [x] **Third-party reviews sections** for all vendor posts
+- [x] **RSS feed aggregator specification** created
+
+---
+
+## 📋 Sprint 6: Real-Time Analytics & Performance Monitoring
+
+### GA4 Analytics Integration
 **Status:** IN PROGRESS
 
-- [ ] Enhance homepage design and user experience
-- [ ] Improve blog post layout and readability
-- [ ] Add interactive features and animations
-- [ ] Optimize mobile responsiveness
-- [ ] Implement advanced SEO features
+- [ ] Test GA4 API connection (`scripts/setup-ga4-connection.js`)
+- [ ] Verify service account permissions in GA4
+- [ ] Deploy real-time analytics dashboard
+- [ ] Set up conversion tracking (consultation requests, newsletter signups)
+- [ ] Configure Google Search Console integration
+- [ ] Create automated performance reports
 
-**Priority:** Medium - can be done in parallel with social automation
+**Blockers:** None - infrastructure ready, needs testing
 
 ---
 
 ## 🚀 Upcoming Priorities
 
-### 1. Production Deployment
-**Timeline:** Week 4-5  
+### 1. Analytics Integration (Real-Time) ← CURRENT
+**Timeline:** Now  
 **Tasks:**
-- [ ] Deploy frontend to Vercel
-- [ ] Configure custom domain
-- [ ] Set up production environment variables
-- [ ] Enable production monitoring
-- [ ] Configure error tracking (Sentry or similar)
-
-### 2. Analytics Integration (Real-Time)
-**Timeline:** Week 5-6  
-**Tasks:**
-- [ ] Complete GA4 real-time data collection
+- [x] GA4 property and service account configured
+- [ ] Test GA4 API connection
+- [ ] Implement real-time analytics dashboard
 - [ ] Set up Google Search Console property
-- [ ] Implement analytics dashboard
 - [ ] Create automated performance reports
 - [ ] Set up conversion tracking
 
-### 3. SEO Optimization
-**Timeline:** Week 6-8  
+### 2. Social Media Automation
+**Timeline:** Week 2-4  
 **Tasks:**
-- [ ] Advanced schema markup implementation
-- [ ] Internal linking optimization
-- [ ] Page speed optimization
-- [ ] Core Web Vitals improvements
-- [ ] XML sitemap enhancements
+- [ ] Install and configure n8n
+- [ ] Get LinkedIn and Twitter API credentials
+- [ ] Test content repurposing workflows
+- [ ] Generate 120+ social posts from 22 blog posts
+- [ ] Set up automated scheduling
+
+### 3. RSS Feed Monitoring System
+**Timeline:** Week 3-4  
+**Tasks:**
+- [ ] Set up Supabase tables for feed monitoring
+- [ ] Create Edge Functions for RSS parsing
+- [ ] Configure cron jobs for weekly feed sync
+- [ ] Build monitoring dashboard
+- [ ] Set up content change alerts
 
 ### 4. Content Expansion
 **Timeline:** Ongoing  
@@ -128,19 +139,25 @@
 
 ## 📚 Content Inventory
 
-### Published Blog Posts (8)
-1. AI Readiness Assessment for Law Firms: A Comprehensive 2025 Guide
-2. Legal AI Implementation Roadmap for Mid-Size Firms  
-3. AI Ethics and Compliance for Law Firms: State Requirements
-4. AI Tool Vendor Evaluation Framework for Legal Practices
-5. Change Management Strategies for Legal AI Adoption
-6. RevOps Metrics and AI ROI in Legal Practice Management
-7. AI-Powered Client Intake Automation for Family Law Firms (practice area example)
-8. The Hidden Debt Burden of Small to Mid-Size Law Firms: Strategic Framework for Sustainable Growth
+### Published Blog Posts (22)
+**Hub Posts (4):**
+1. AI Contract Tools for Law Firms: Complete 2025 Comparison (Spellbook, Thomson Reuters, Document Intelligence)
+2. AI Legal Research Tools for Law Firms: Complete 2025 Comparison
+3. AI Document Review Tools for Law Firms: Complete 2025 Comparison
+4. AI Document Drafting Tools for Law Firms: Complete 2025 Comparison
 
-**Total Content:** 33,000+ words  
-**SEO Status:** All optimized with meta tags, structured data, standardized images  
-**Repository:** https://github.com/renfro-dev/nativelegal
+**Spoke Posts (18):**
+- Harvey AI Complete Guide
+- Latch AI Contract Negotiation
+- Lexion CLM Platform
+- LegalSifter AI Contract Review
+- vLex Vincent AI Legal Research
+- Plus 13 additional optimized posts
+
+**Total Content:** 100,000+ words  
+**SEO Status:** All optimized with full metadata, internal linking, FAQs, citations, schema markup  
+**Repository:** https://github.com/renfro-dev/nativelegal  
+**Live Site:** https://native.legal
 
 ### Social Media Content (In Progress)
 - **Planned:** 120+ social posts from existing 8 blog posts
